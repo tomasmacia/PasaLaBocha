@@ -25,9 +25,16 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.cancha}" method="POST">
+            <h1> ${params}<h1>
+            <g:form resource="${this.cancha}" method="POST" params="[club: params.club.id]"><!-- Esto es un comentario params="${params.club}"-->
                 <fieldset class="form">
-                    <f:all bean="cancha"/>
+                    <f:field bean="cancha" property="tipoSuelo"/>
+                    <f:field bean="cancha" property="numeroDeCancha"/>
+                    <f:field bean="cancha" property="turnos"/>
+                    <f:field bean="cancha" property="cantidadJugadores"/>
+                    <f:field bean="cancha" property="dimensiones"/>
+                    <f:field bean="cancha" property="poseeIluminacion"/>
+                    <f:display bean="cancha" property="club"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

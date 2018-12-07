@@ -39,7 +39,7 @@ class CanchaController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'cancha.label', default: 'Cancha'), cancha.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'cancha.label', default: 'Cancha'), cancha.id]) //cancha.numeroDeCancha])
                 redirect cancha
             }
             '*' { respond cancha, [status: CREATED] }

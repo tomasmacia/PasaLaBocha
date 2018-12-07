@@ -14,5 +14,10 @@ class Club {
     static constraints = {
       nombre nullable: false, blank: false
       canchas minSize: 0
+      email email: true
+    }
+
+    String toString(){
+      nombre
     }
 }

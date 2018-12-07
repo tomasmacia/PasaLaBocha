@@ -13,12 +13,17 @@ class Cancha {
 
     static hasMany = [turnos: Turno]
 
-    //static belongsTo = [club: Club] // no existe la cancha si desaparece el Club
+    static belongsTo = [club: Club] // no existe la cancha si desaparece el Club
 
     static constraints = {
     }
 
+    static mapping = {
+      //version false
+      //id column: 'numeroDeCancha'
+    }
+
     String toString(){
-      "${numeroDeCancha}"
+      "${club}: ${numeroDeCancha}"
     }
 }
