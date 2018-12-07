@@ -1,11 +1,11 @@
-package pasalabocha
+package pasalabocha.login
 
 import grails.testing.gorm.DomainUnitTest
 import grails.testing.web.controllers.ControllerUnitTest
 import grails.validation.ValidationException
 import spock.lang.*
 
-class CanchaControllerSpec extends Specification implements ControllerUnitTest<CanchaController>, DomainUnitTest<Cancha> {
+class RoleControllerSpec extends Specification implements ControllerUnitTest<RoleController>, DomainUnitTest<Role> {
 
     def populateValidParams(params) {
         assert params != null
@@ -17,7 +17,7 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
 
     void "Test the index action returns the correct model"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
+        controller.roleService = Mock(RoleService) {
             1 * list(_) >> []
             1 * count() >> 0
         }
@@ -26,8 +26,8 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
         controller.index()
 
         then:"The model is correct"
-        !model.canchaList
-        model.canchaCount == 0
+        !model.roleList
+        model.roleCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -35,7 +35,7 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
         controller.create()
 
         then:"The model is correctly created"
-        model.cancha!= null
+        model.role!= null
     }
 
     void "Test the save action with a null instance"() {
@@ -45,14 +45,14 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
         controller.save(null)
 
         then:"A 404 error is returned"
-        response.redirectedUrl == '/cancha/index'
+        response.redirectedUrl == '/role/index'
         flash.message != null
     }
 
     void "Test the save action correctly persists"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
-            1 * save(_ as Cancha)
+        controller.roleService = Mock(RoleService) {
+            1 * save(_ as Role)
         }
 
         when:"The save action is executed with a valid instance"
@@ -60,38 +60,38 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
         populateValidParams(params)
-        def cancha = new Cancha(params)
-        cancha.id = 1
+        def role = new Role(params)
+        role.id = 1
 
-        controller.save(cancha)
+        controller.save(role)
 
         then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/cancha/show/1'
+        response.redirectedUrl == '/role/show/1'
         controller.flash.message != null
     }
 
     void "Test the save action with an invalid instance"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
-            1 * save(_ as Cancha) >> { Cancha cancha ->
-                throw new ValidationException("Invalid instance", cancha.errors)
+        controller.roleService = Mock(RoleService) {
+            1 * save(_ as Role) >> { Role role ->
+                throw new ValidationException("Invalid instance", role.errors)
             }
         }
 
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        def cancha = new Cancha()
-        controller.save(cancha)
+        def role = new Role()
+        controller.save(role)
 
         then:"The create view is rendered again with the correct model"
-        model.cancha != null
+        model.role != null
         view == 'create'
     }
 
     void "Test the show action with a null id"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
+        controller.roleService = Mock(RoleService) {
             1 * get(null) >> null
         }
 
@@ -104,20 +104,20 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
 
     void "Test the show action with a valid id"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
-            1 * get(2) >> new Cancha()
+        controller.roleService = Mock(RoleService) {
+            1 * get(2) >> new Role()
         }
 
         when:"A domain instance is passed to the show action"
         controller.show(2)
 
         then:"A model is populated containing the domain instance"
-        model.cancha instanceof Cancha
+        model.role instanceof Role
     }
 
     void "Test the edit action with a null id"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
+        controller.roleService = Mock(RoleService) {
             1 * get(null) >> null
         }
 
@@ -130,15 +130,15 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
 
     void "Test the edit action with a valid id"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
-            1 * get(2) >> new Cancha()
+        controller.roleService = Mock(RoleService) {
+            1 * get(2) >> new Role()
         }
 
         when:"A domain instance is passed to the show action"
         controller.edit(2)
 
         then:"A model is populated containing the domain instance"
-        model.cancha instanceof Cancha
+        model.role instanceof Role
     }
 
 
@@ -149,14 +149,14 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
         controller.update(null)
 
         then:"A 404 error is returned"
-        response.redirectedUrl == '/cancha/index'
+        response.redirectedUrl == '/role/index'
         flash.message != null
     }
 
     void "Test the update action correctly persists"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
-            1 * save(_ as Cancha)
+        controller.roleService = Mock(RoleService) {
+            1 * save(_ as Role)
         }
 
         when:"The save action is executed with a valid instance"
@@ -164,31 +164,31 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
         populateValidParams(params)
-        def cancha = new Cancha(params)
-        cancha.id = 1
+        def role = new Role(params)
+        role.id = 1
 
-        controller.update(cancha)
+        controller.update(role)
 
         then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/cancha/show/1'
+        response.redirectedUrl == '/role/show/1'
         controller.flash.message != null
     }
 
     void "Test the update action with an invalid instance"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
-            1 * save(_ as Cancha) >> { Cancha cancha ->
-                throw new ValidationException("Invalid instance", cancha.errors)
+        controller.roleService = Mock(RoleService) {
+            1 * save(_ as Role) >> { Role role ->
+                throw new ValidationException("Invalid instance", role.errors)
             }
         }
 
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
-        controller.update(new Cancha())
+        controller.update(new Role())
 
         then:"The edit view is rendered again with the correct model"
-        model.cancha != null
+        model.role != null
         view == 'edit'
     }
 
@@ -199,13 +199,13 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
         controller.delete(null)
 
         then:"A 404 is returned"
-        response.redirectedUrl == '/cancha/index'
+        response.redirectedUrl == '/role/index'
         flash.message != null
     }
 
     void "Test the delete action with an instance"() {
         given:
-        controller.canchaService = Mock(CanchaService) {
+        controller.roleService = Mock(RoleService) {
             1 * delete(2)
         }
 
@@ -215,7 +215,7 @@ class CanchaControllerSpec extends Specification implements ControllerUnitTest<C
         controller.delete(2)
 
         then:"The user is redirected to index"
-        response.redirectedUrl == '/cancha/index'
+        response.redirectedUrl == '/role/index'
         flash.message != null
     }
 }

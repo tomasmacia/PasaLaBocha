@@ -3,7 +3,6 @@ package pasalabocha
 class Club {
     String nombre
     String email
-    String password
     String ubicacion
     Integer nivelConfiabilidadNecesario
     Integer porcentajeSena
@@ -13,5 +12,7 @@ class Club {
     static hasMany = [canchas: Cancha]
 
     static constraints = {
+      nombre nullable: false, blank: false
+      canchas minSize: 0
     }
 }

@@ -1,11 +1,18 @@
 package pasalabocha
 
-import grails.gorm.transactions.Transactional
+import grails.gorm.services.Service
 
-@Transactional
-class CanchaService {
+@Service(Cancha)
+interface CanchaService {
 
-    Cancha get(Long canchaId) {
-        Cancha.get(canchaId)
-    }
+    Cancha get(Serializable id)
+
+    List<Cancha> list(Map args)
+
+    Long count()
+
+    void delete(Serializable id)
+
+    Cancha save(Cancha cancha)
+
 }

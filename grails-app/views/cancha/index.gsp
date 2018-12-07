@@ -2,26 +2,26 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'club.label', default: 'Club')}" />
+        <g:set var="entityName" value="${message(code: 'cancha.label', default: 'Cancha')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#list-club" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+        <a href="#list-cancha" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                 <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
-        <div id="list-club" class="content scaffold-list" role="main">
+        <div id="list-cancha" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${clubList}" properties="['nombre', 'ubicacion','email']"/>
+            <f:table collection="${canchaList}" />
 
             <div class="pagination">
-                <g:paginate total="${clubCount ?: 0}" />
+                <g:paginate total="${canchaCount ?: 0}" />
             </div>
         </div>
     </body>

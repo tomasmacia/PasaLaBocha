@@ -5,7 +5,6 @@ class Cliente {
     String apellido
     String email
     String apodo
-    String password
     Integer nivelConfiabilidad
 
     static constraints = {

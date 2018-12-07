@@ -1,35 +1,18 @@
 package pasalabocha
 
-import grails.gorm.transactions.Transactional
+import grails.gorm.services.Service
 
-@Transactional
-class ClubService {
+@Service(Club)
+interface ClubService {
 
-    def get(Long clubId) {
-        Club.get(clubId)
-    }
+    Club get(Serializable id)
 
-    def registrarCancha(Long clubId, Cancha cancha) {
-        Club club = get(clubId)
-        club.addToCanchas(cancha)
-    }
+    List<Club> list(Map args)
 
-    def registrarCanchas(Long clubId, List<Cancha> canchas) {
-        Club club = get(clubId)
-        canchas.collect{ Cancha cancha ->
-            club.addToCanchas(cancha)
-        }
-    }
+    Long count()
 
-    def eliminarCancha(Long clubId, Cancha cancha) {
-        Club club = get(clubId)
-        club.removeFromCanchas(cancha)
-    }
+    void delete(Serializable id)
 
-    def eliminarCanchas(Long clubId, List<Cancha> canchas) {
-        Club club = get(clubId)
-        canchas.collect{ Cancha cancha ->
-            club.removeFromCanchas(cancha)
-        }
-    }
+    Club save(Club club)
+
 }

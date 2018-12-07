@@ -1,74 +1,74 @@
-package pasalabocha
+package pasalabocha.login
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['permitAll'])
-class ClubController {
+@Secured(['ROLE_ADMIN'])
+class UserController {
 
-    ClubService clubService
+    UserService userService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond clubService.list(params), model:[clubCount: clubService.count()]
+        respond userService.list(params), model:[userCount: userService.count()]
     }
 
     def show(Long id) {
-        respond clubService.get(id)
+        respond userService.get(id)
     }
 
     def create() {
-        respond new Club(params)
+        respond new User(params)
     }
 
-    def save(Club club) {
-        if (club == null) {
+    def save(User user) {
+        if (user == null) {
             notFound()
             return
         }
 
         try {
-            clubService.save(club)
+            userService.save(user)
         } catch (ValidationException e) {
-            respond club.errors, view:'create'
+            respond user.errors, view:'create'
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'club.label', default: 'Club'), club.id])
-                redirect club
+                flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                redirect user
             }
-            '*' { respond club, [status: CREATED] }
+            '*' { respond user, [status: CREATED] }
         }
     }
 
     def edit(Long id) {
-        respond clubService.get(id)
+        respond userService.get(id)
     }
 
-    def update(Club club) {
-        if (club == null) {
+    def update(User user) {
+        if (user == null) {
             notFound()
             return
         }
 
         try {
-            clubService.save(club)
+            userService.save(user)
         } catch (ValidationException e) {
-            respond club.errors, view:'edit'
+            respond user.errors, view:'edit'
             return
         }
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'club.label', default: 'Club'), club.id])
-                redirect club
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                redirect user
             }
-            '*'{ respond club, [status: OK] }
+            '*'{ respond user, [status: OK] }
         }
     }
 
@@ -78,11 +78,11 @@ class ClubController {
             return
         }
 
-        clubService.delete(id)
+        userService.delete(id)
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'club.label', default: 'Club'), id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -92,7 +92,7 @@ class ClubController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'club.label', default: 'Club'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
