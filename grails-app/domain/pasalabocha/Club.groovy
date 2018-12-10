@@ -1,12 +1,14 @@
 package pasalabocha
 
+import java.time.Duration
+
 class Club {
     String nombre
     String email
     String ubicacion
     Integer nivelConfiabilidadNecesario
     Integer porcentajeSena
-    Integer tiempoLimiteCancelacionReserva
+    Duration tiempoLimiteCancelacionReserva
     List<Cancha> canchas
 
     static hasMany = [canchas: Cancha]

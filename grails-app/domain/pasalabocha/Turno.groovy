@@ -3,6 +3,7 @@ package pasalabocha
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.LocalDateTime
 
 class Turno {
     LocalDate fecha
@@ -27,7 +28,11 @@ class Turno {
 
     def reservar(){
       System.out.println("reservando")
-      reserva = new Reserva([turno:this]).save(failOnError: true)
+      //modificar precioBase cuando esten los descuentos
+      Duration tiempoLimiteCancelacionReserva = this.cancha.club.tiempoLimiteCancelacionReserva
+      LocalDateTime plazoLimiteCancelacion = LocalDateTime.of(this.fecha, this.horario)
+      plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
+      reserva = new Reserva([turno:this, precioFinal: this.precioBase, plazoLimiteCancelacion: plazoLimiteCancelacion]).save(failOnError: true)
       System.out.println(reserva)
       this.save()
     }

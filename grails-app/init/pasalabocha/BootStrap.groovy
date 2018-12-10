@@ -18,7 +18,7 @@ class BootStrap {
               ubicacion: "Av. Pres. Figueroa Alcorta 7597, Nunez",
               nivelConfiabilidadNecesario: 10,
               porcentajeSena: 40,
-              tiempoLimiteCancelacionReserva: 1,
+              tiempoLimiteCancelacionReserva: Duration.ofHours(1),
               //canchas: [canchaUno, canchaDos],
       ]).save(failOnError: true)
 
@@ -28,7 +28,7 @@ class BootStrap {
               ubicacion:"Brandsen 805, La boca",
               nivelConfiabilidadNecesario: 10,
               porcentajeSena: 40,
-              tiempoLimiteCancelacionReserva: 1,
+              tiempoLimiteCancelacionReserva: Duration.ofHours(1),
       ]).save(failOnError: true)
 
       Cancha canchaUno = new Cancha([

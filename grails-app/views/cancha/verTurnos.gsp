@@ -10,7 +10,7 @@
         <tr>
           <th>Fecha</th>
           <th>Horario</th>
-          <th>Duración</th>
+          <th>Duración[minutos]</th>
           <th>Precio</th>
           <th>Reserva</th>
         </tr>
@@ -18,10 +18,10 @@
           <tr>
             <td>${turno.fecha}</td>
             <td>${turno.horario}</td>
-            <td>${turno.duracion}</td>
+            <td>${turno.duracion.toMinutes()}</td>
             <td>${turno.precioBase}</td>
             <g:if test="${turno.reserva != null}">
-            <td>${turno.reserva}</td>
+            <td>Reservado</td>
             </g:if>
             <g:else>
             <td>Disponible: <g:link action="reservarTurno" params="[turnoId:turno.id]">Reservar</g:link></td>

@@ -6,6 +6,8 @@ class Reserva {
     BigDecimal precioFinal
     LocalDateTime plazoLimiteCancelacion
     boolean concretada = false
+    // cual seria la diferencia con el id que genera grails?
+    // responder a franco
     Integer nroReserva
     Turno turno
 
@@ -15,8 +17,6 @@ class Reserva {
 
     static constraints = {
       //nullable porque todavia no esta implementado que se complete
-      precioFinal nullable: true
-      plazoLimiteCancelacion nullable: true
       nroReserva nullable: true
       sena nullable: true
     }
