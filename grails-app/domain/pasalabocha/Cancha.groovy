@@ -16,6 +16,7 @@ class Cancha {
     static belongsTo = [club: Club] // no existe la cancha si desaparece el Club
 
     static constraints = {
+      numeroDeCancha nullable: false
     }
 
     static mapping = {

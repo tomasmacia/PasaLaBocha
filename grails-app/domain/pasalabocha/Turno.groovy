@@ -15,5 +15,12 @@ class Turno {
     static belongsTo = [cancha: Cancha]
 
     static constraints = {
+      reserva nullable: true
+      duracion nullable: true
+      horario nullable: true
+    }
+
+    String toString(){
+      "${cancha}: ${fecha}"//", ${horario}, ${duracion.toHours()} horas"
     }
 }

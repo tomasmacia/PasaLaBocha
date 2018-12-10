@@ -1,6 +1,9 @@
 package pasalabocha
 
 import pasalabocha.login.*
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Duration;
 
 class BootStrap {
 
@@ -46,7 +49,16 @@ class BootStrap {
               club: clubUno,
       ]).save(failOnError: true)
 
-
+      LocalDate hoy = LocalDate.now();
+      LocalTime las12 = LocalTime.of(12,0,0);
+      Duration unaHora = Duration.ofHours(1);
+      def turno1 = new Turno([
+              fecha: hoy,
+              horario: las12,
+              duracion: unaHora,
+              precioBase: 500,
+              cancha: canchaUno,
+      ]).save(failOnError: true)
 
 //        clubService.registrarCanchas(clubUno.id, Arrays.asList(canchaUno, canchaDos))
       System.out.println(clubUno.canchas)
@@ -56,7 +68,7 @@ class BootStrap {
         def clubRole = new Role(authority: 'ROLE_CLUB').save()
         def usuarioRole = new Role(authority: 'ROLE_USUARIO').save()
 
-        def testAdmin = new User(username: 'admin', password: 'supersecreta').save()
+        def testAdmin = new User(username: 'admin', password: 'admin').save()
         def testClub = new User(username: 'river', password: '1234', club: clubUno).save()
 
         UserRole.create testAdmin, adminRole
