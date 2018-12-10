@@ -24,7 +24,7 @@
             <td>${turno.reserva}</td>
             </g:if>
             <g:else>
-            <td>Disponible: <g:link action="reservarTurno" turno="${turno}">Reservar</g:link></td>
+            <td>Disponible: <g:link action="reservarTurno" params="[turnoId:turno.id]">Reservar</g:link></td>
             </g:else>
           </tr>
         </g:each>

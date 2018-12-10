@@ -10,6 +10,7 @@ class Turno {
     Duration duracion
     BigDecimal precioBase
 
+
     static hasOne = [reserva: Reserva]
 
     static belongsTo = [cancha: Cancha]
@@ -22,5 +23,12 @@ class Turno {
 
     String toString(){
       "${cancha}: ${fecha}, ${horario}, ${duracion.toMinutes()} minutos"
+    }
+
+    def reservar(){
+      System.out.println("reservando")
+      reserva = new Reserva([turno:this]).save(failOnError: true)
+      System.out.println(reserva)
+      this.save()
     }
 }

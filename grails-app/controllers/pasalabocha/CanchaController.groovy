@@ -10,6 +10,7 @@ import java.time.LocalTime
 class CanchaController {
 
     CanchaService canchaService
+    TurnoService turnoService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", generarTurnos: "POST"]
 
@@ -42,6 +43,14 @@ class CanchaController {
       Cancha cancha = canchaService.get(id)
       System.out.println(cancha.turnos)
       respond cancha.turnos
+    }
+
+    def reservarTurno(){
+        System.out.println(params.turnoId)
+
+        Turno turno = turnoService.get(params.turnoId)
+        turno.reservar()
+        redirect(action:"verTurnos", params: [id: turno.cancha.id])
     }
 
     def save(Cancha cancha) {
