@@ -38,6 +38,12 @@ class CanchaController {
       redirect(action: "show", params: [id: params.id])
     }
 
+    def verTurnos(Long id){
+      Cancha cancha = canchaService.get(id)
+      System.out.println(cancha.turnos)
+      respond cancha.turnos
+    }
+
     def save(Cancha cancha) {
         if (cancha == null) {
             notFound()

@@ -4,6 +4,7 @@ import grails.gorm.services.Service
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalTime
+import grails.gorm.transactions.Transactional
 
 @Service(Cancha)
 abstract class CanchaService {
@@ -18,6 +19,7 @@ abstract class CanchaService {
 
     protected abstract Cancha save(Cancha cancha)
 
+    @Transactional
     void generarTurnos(Long id, LocalTime horarioInicio, LocalTime horarioFin, Duration largoTurno, Long precio){
       horarioInicio = horarioInicio + largoTurno
       Cancha cancha = get(id)

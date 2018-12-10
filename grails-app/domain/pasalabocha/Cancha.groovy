@@ -11,6 +11,7 @@ class Cancha {
     boolean poseeIluminacion
     Integer cantidadJugadores
     //Hashtable<LocalDateTime, Turno> turnos
+    List<Turno> turnos
     // boolean aptoEspectador
 
     static embedded = ['dimensiones']
