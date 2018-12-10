@@ -1,5 +1,8 @@
 package pasalabocha
 
+import java.util.Hashtable
+import java.time.LocalDateTime
+
 class Cancha {
 
     Dimensiones dimensiones
@@ -7,6 +10,7 @@ class Cancha {
     Integer numeroDeCancha
     boolean poseeIluminacion
     Integer cantidadJugadores
+    //Hashtable<LocalDateTime, Turno> turnos
     // boolean aptoEspectador
 
     static embedded = ['dimensiones']

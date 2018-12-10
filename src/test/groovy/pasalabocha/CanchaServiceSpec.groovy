@@ -13,6 +13,6 @@ class CanchaServiceSpec extends Specification implements ServiceUnitTest<CanchaS
 
     void "test something"() {
         expect:"fix me"
-            true == true
+            true == false
     }
 }

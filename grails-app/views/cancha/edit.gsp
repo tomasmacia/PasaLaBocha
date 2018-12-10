@@ -29,7 +29,17 @@
             <g:form resource="${this.cancha}" method="PUT">
                 <g:hiddenField name="version" value="${this.cancha?.version}" />
                 <fieldset class="form">
-                    <f:all bean="cancha"/>
+                  <h2>${this.cancha}</h2>
+                  <label>Numero de cancha: <f:display bean="cancha" property="numeroDeCancha"/></label><br>
+                  <label>Club: <f:display bean="cancha" property="club" /></label><br>
+                  <f:field bean="cancha" property="tipoSuelo"/>
+                  <f:field bean="cancha" property="cantidadJugadores"/>
+                  <f:field bean="cancha" property="dimensiones"/>
+                  <f:field bean="cancha" property="poseeIluminacion"/>
+                </fieldset>
+                <fieldset class="turnos">
+                  <f:field bean="cancha" property="turnos"/>
+                  <g:link action="crearTurnos" id="${this.cancha.id}">Crear turnos</g:link>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

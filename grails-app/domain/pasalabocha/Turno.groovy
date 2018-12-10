@@ -16,11 +16,11 @@ class Turno {
 
     static constraints = {
       reserva nullable: true
-      duracion nullable: true
-      horario nullable: true
+      //duracion nullable: true
+      //horario nullable: true
     }
 
     String toString(){
-      "${cancha}: ${fecha}"//", ${horario}, ${duracion.toHours()} horas"
+      "${cancha}: ${fecha}, ${horario}, ${duracion.toMinutes()} minutos"
     }
 }

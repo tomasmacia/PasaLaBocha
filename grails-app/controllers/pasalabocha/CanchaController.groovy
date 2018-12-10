@@ -3,13 +3,15 @@ package pasalabocha
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
+import java.time.Duration
+import java.time.LocalTime
 
 @Secured(['permitAll'])
 class CanchaController {
 
     CanchaService canchaService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", generarTurnos: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -22,6 +24,18 @@ class CanchaController {
 
     def create() {
         respond new Cancha(params)
+    }
+
+    def crearTurnos(Long id){
+    }
+
+    def generarTurnos(){
+      LocalTime horarioInicio = LocalTime.parse(params.horarioInicio)
+      LocalTime horarioFin = LocalTime.parse(params.horarioFin)
+      Duration largoTurno = Duration.ofMinutes(Long.valueOf(params.largoTurno))
+      canchaService.generarTurnos(Long.valueOf(params.id), horarioInicio, horarioFin, largoTurno, Long.valueOf(params.precio))
+
+      redirect(action: "show", params: [id: params.id])
     }
 
     def save(Cancha cancha) {
@@ -72,6 +86,7 @@ class CanchaController {
         }
     }
 
+    // NO FUNCIONA; AL ELIMINAR SIGUE AHI
     def delete(Long id) {
         if (id == null) {
             notFound()
