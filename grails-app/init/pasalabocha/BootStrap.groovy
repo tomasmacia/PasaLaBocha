@@ -19,7 +19,7 @@ class BootStrap {
               nivelConfiabilidadNecesario: 10,
               porcentajeSena: 40,
               tiempoLimiteCancelacionReserva: Duration.ofHours(1),
-              //canchas: [canchaUno, canchaDos],
+              tiempoLimitePagoDeSena: Duration.ofHours(2)
       ]).save(failOnError: true)
 
       Club clubDos = new Club([
@@ -29,6 +29,7 @@ class BootStrap {
               nivelConfiabilidadNecesario: 10,
               porcentajeSena: 40,
               tiempoLimiteCancelacionReserva: Duration.ofHours(1),
+              tiempoLimitePagoDeSena: Duration.ofHours(2)
       ]).save(failOnError: true)
 
       Cancha canchaUno = new Cancha([

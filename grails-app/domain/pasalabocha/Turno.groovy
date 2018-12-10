@@ -27,13 +27,12 @@ class Turno {
     }
 
     def reservar(){
-      System.out.println("reservando")
       //modificar precioBase cuando esten los descuentos
       Duration tiempoLimiteCancelacionReserva = this.cancha.club.tiempoLimiteCancelacionReserva
       LocalDateTime plazoLimiteCancelacion = LocalDateTime.of(this.fecha, this.horario)
       plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
-      reserva = new Reserva([turno:this, precioFinal: this.precioBase, plazoLimiteCancelacion: plazoLimiteCancelacion]).save(failOnError: true)
-      System.out.println(reserva)
+      Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
+      reserva = new Reserva(this, this.precioBase, plazoLimiteCancelacion, tiempoLimitePagoDeSena).save(failOnError: true)
       this.save()
     }
 }
