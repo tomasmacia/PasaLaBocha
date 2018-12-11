@@ -8,6 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class ClubController {
 
     ClubService clubService
+    ClienteService clienteService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -22,6 +23,30 @@ class ClubController {
 
     def create() {
         respond new Club(params)
+    }
+
+    def verClientesHabituales(Long id){
+      Club club = clubService.get(id)
+      println(club.clientesHabituales)
+      respond club.clientesHabituales, model:[id: id]
+    }
+
+    def agregarClienteHabitualForm(Long id){
+      respond clienteService.list(), model:[id:id]
+    }
+
+    def agregarClienteHabitual(Long id, String username){
+      Cliente cliente = Cliente.findByUsername(username)
+      clubService.agregarClienteHabitual(id, cliente)
+      redirect(action:"verClientesHabituales", params: [id: id])
+    }
+
+    def eliminarClienteHabitual(Long id, String username){
+      println(username)
+      println(id)
+      Cliente cliente = Cliente.findByUsername(username)
+      clubService.eliminarClienteHabitual(id, cliente)
+      redirect(action:"verClientesHabituales", params: [id: id])
     }
 
     def save(Club club) {

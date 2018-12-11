@@ -1,18 +1,31 @@
 package pasalabocha
 
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
 
 @Service(Club)
-interface ClubService {
+abstract class ClubService {
 
-    Club get(Serializable id)
+    protected abstract Club get(Serializable id)
 
-    List<Club> list(Map args)
+    protected abstract List<Club> list(Map args)
 
-    Long count()
+    protected abstract Long count()
 
-    void delete(Serializable id)
+    protected abstract void delete(Serializable id)
 
-    Club save(Club club)
+    protected abstract Club save(Club club)
+
+    @Transactional
+    def agregarClienteHabitual(Long id, Cliente cliente){
+      Club club = get(id)
+      club.addToClientesHabituales(cliente)
+    }
+
+    @Transactional
+    def eliminarClienteHabitual(Long id, Cliente cliente){
+      Club club = get(id)
+      club.removeFromClientesHabituales(cliente)
+    }
 
 }

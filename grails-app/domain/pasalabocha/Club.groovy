@@ -13,8 +13,9 @@ class Club extends User{
     Duration tiempoLimiteCancelacionReserva
     Duration tiempoLimitePagoDeSena
     List<Cancha> canchas
+    Set<Cliente> clientesHabituales
 
-    static hasMany = [canchas: Cancha]
+    static hasMany = [canchas: Cancha, clientesHabituales: Cliente]
 
     static constraints = {
       nombre nullable: false, blank: false

@@ -11,7 +11,6 @@ class Turno {
     Duration duracion
     BigDecimal precioBase
 
-
     static hasOne = [reserva: Reserva]
 
     static belongsTo = [cancha: Cancha]
@@ -32,7 +31,7 @@ class Turno {
       LocalDateTime plazoLimiteCancelacion = LocalDateTime.of(this.fecha, this.horario)
       plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
       Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
-      reserva = new Reserva(this, cliente, this.precioBase, plazoLimiteCancelacion, tiempoLimitePagoDeSena).save(failOnError: true)
-      this.save()
+      reserva = new Reserva(this, cliente, this.precioBase, plazoLimiteCancelacion).save(failOnError: true)
+      this.save(failOnError: true)
     }
 }
