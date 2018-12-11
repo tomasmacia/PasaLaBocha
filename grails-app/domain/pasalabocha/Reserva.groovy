@@ -15,15 +15,16 @@ class Reserva {
 
     static hasOne = [sena: Sena]
 
-    static belongsTo = [turno: Turno]
+    static belongsTo = [turno: Turno, cliente: Cliente]
 
     static constraints = {
       //nullable porque todavia no esta implementado que se complete
       nroReserva nullable: true
     }
 
-    public Reserva(Turno turno, BigDecimal precio, LocalDateTime plazoLimiteCancelacion, Duration  tiempoLimitePagoDeSena){
+    public Reserva(Turno turno, Cliente cliente, BigDecimal precio, LocalDateTime plazoLimiteCancelacion, Duration  tiempoLimitePagoDeSena){
       this.turno = turno
+      this.cliente = cliente
       this.precioFinal = precio
       this.plazoLimiteCancelacion = plazoLimiteCancelacion
       this.sena = new Sena(this, tiempoLimitePagoDeSena, precio * this.turno.cancha.club.porcentajeSena / 100)

@@ -39,6 +39,7 @@ class CanchaController {
       redirect(action: "show", params: [id: params.id])
     }
 
+    @Secured(['ROLE_CLIENTE'])
     def verTurnos(Long id){
       Cancha cancha = canchaService.get(id)
       System.out.println(cancha.turnos)
@@ -49,7 +50,7 @@ class CanchaController {
         System.out.println(params.turnoId)
 
         Turno turno = turnoService.get(params.turnoId)
-        turno.reservar()
+        turno.reservar(authenticatedUser)
         redirect(action:"verTurnos", params: [id: turno.cancha.id])
     }
 

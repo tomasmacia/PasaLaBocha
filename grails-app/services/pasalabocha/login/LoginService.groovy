@@ -5,7 +5,7 @@ class LoginService{
   boolean esCliente(boolean loggedIn, def authenticatedUser){
     if (loggedIn) {
        Set<Role> roles = authenticatedUser.getAuthorities()
-       return roles.contains(new Role(authority: 'ROLE_USUARIO'))
+       return roles.contains(new Role(authority: 'ROLE_CLIENTE'))
     }
     false
   }

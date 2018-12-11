@@ -9,6 +9,8 @@ class Cliente extends User{
     String apodo
     Integer nivelConfiabilidad = 0
 
+    static hasMany = [reservas: Reserva]
+
     static constraints = {
       nombre nullable: false, blank: false
       apellido nullable: false, blank: false

@@ -26,13 +26,13 @@ class Turno {
       "${cancha}: ${fecha}, ${horario}, ${duracion.toMinutes()} minutos"
     }
 
-    def reservar(){
+    def reservar(Cliente cliente){
       //modificar precioBase cuando esten los descuentos
       Duration tiempoLimiteCancelacionReserva = this.cancha.club.tiempoLimiteCancelacionReserva
       LocalDateTime plazoLimiteCancelacion = LocalDateTime.of(this.fecha, this.horario)
       plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
       Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
-      reserva = new Reserva(this, this.precioBase, plazoLimiteCancelacion, tiempoLimitePagoDeSena).save(failOnError: true)
+      reserva = new Reserva(this, cliente, this.precioBase, plazoLimiteCancelacion, tiempoLimitePagoDeSena).save(failOnError: true)
       this.save()
     }
 }

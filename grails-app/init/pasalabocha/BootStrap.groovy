@@ -71,7 +71,7 @@ class BootStrap {
         // initializing login data
         def adminRole = new Role(authority: 'ROLE_ADMIN').save()
         def clubRole = new Role(authority: 'ROLE_CLUB').save()
-        def usuarioRole = new Role(authority: 'ROLE_USUARIO').save()
+        def clienteRole = new Role(authority: 'ROLE_CLIENTE').save()
 
         def testAdmin = new User(username: 'admin', password: 'admin').save()
         //def testClub = new User(username: 'river', password: '1234', club: clubUno).save()
@@ -87,7 +87,7 @@ class BootStrap {
         UserRole.create testAdmin, adminRole
         UserRole.create clubUno, clubRole
         UserRole.create clubDos, clubRole
-        UserRole.create testCliente, usuarioRole
+        UserRole.create testCliente, clienteRole
 
         UserRole.withSession {
             it.flush()
