@@ -8,15 +8,15 @@ class Sena {
     boolean pagada = false
     LocalDateTime plazoLimitePago
     Integer nroSena // diferente al id de Sena
-    Reserva reserva
 
-    //static belongsTo = [reserva: Reserva]
+    static belongsTo = [reserva: Reserva]
 
     static constraints = {
       nroSena nullable: true
     }
 
-    public Sena(Duration tiempoLimitePagoDeSena, BigDecimal monto){
+    public Sena(Reserva reserva, Duration tiempoLimitePagoDeSena, BigDecimal monto){
+      this.reserva = reserva
       this.plazoLimitePago = LocalDateTime.now() + tiempoLimitePagoDeSena
       this.monto = monto
     }
