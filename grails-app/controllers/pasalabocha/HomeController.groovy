@@ -18,4 +18,6 @@ class HomeController {
            println(club)
       }
     }
+
+    def createUser(){ }
 }

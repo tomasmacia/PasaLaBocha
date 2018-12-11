@@ -7,8 +7,12 @@ class Cliente extends User{
     String apellido
     String email
     String apodo
-    Integer nivelConfiabilidad
+    Integer nivelConfiabilidad = 0
 
     static constraints = {
+      nombre nullable: false, blank: false
+      apellido nullable: false, blank: false
+      email email: true
+      apodo nullable: true, blank: true
     }
 }

@@ -2,41 +2,37 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'club.label', default: 'Club')}" />
+        <g:set var="entityName" value="${message(code: 'cliente.label', default: 'Cliente')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-club" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+        <a href="#create-cliente" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                 <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
-        <div id="create-club" class="content scaffold-create" role="main">
+        <div id="create-cliente" class="content scaffold-create" role="main">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${this.club}">
+            <g:hasErrors bean="${this.cliente}">
             <ul class="errors" role="alert">
-                <g:eachError bean="${this.club}" var="error">
+                <g:eachError bean="${this.cliente}" var="error">
                 <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.club}" method="POST">
+            <g:form resource="${this.cliente}" method="POST">
                 <fieldset class="form">
-                    <f:field bean="club" property="username"/>
-                    <f:field bean="club" property="password"/>
-                    <f:field bean="club" property="nombre"/>
-                    <f:field bean="club" property="ubicacion"/>
-                    <f:field bean="club" property="email"/>
-                    <f:field bean="club" property="nivelConfiabilidadNecesario"/>
-                    <f:field bean="club" property="porcentajeSena"/>
-                    <!-- Se requiere uso de JODA TIME-->
-                    <f:field bean="club" property="tiempoLimiteCancelacionReserva"/>
-                    <f:field bean="club" property="tiempoLimitePagoDeSena"/>
+                  <f:field bean="cliente" property="username"/>
+                  <f:field bean="cliente" property="password"/>
+                  <f:field bean="cliente" property="nombre"/>
+                  <f:field bean="cliente" property="apellido"/>
+                  <f:field bean="cliente" property="apodo"/>
+                  <f:field bean="cliente" property="email"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

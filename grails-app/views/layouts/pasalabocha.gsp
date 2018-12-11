@@ -43,8 +43,14 @@
             <!-- Navigation -->
             %{--<div class="android-navigation-container">--}%
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Algo</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Sarasa</a>
+                    <sec:ifLoggedIn>
+                      <a class="mdl-navigation__link mdl-typography--text-uppercase" href=""><sec:username/></a>
+                      <a class="mdl-navigation__link mdl-typography--text-uppercase" href="http://localhost:8080/logout">Cerrar sesión</a>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="http://localhost:8080/login/auth">Iniciar sesión</a>
+                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="http://localhost:8080/home/createUser">Crear cuenta</a>
+                    </sec:ifNotLoggedIn>
                 </nav>
             %{--</div>--}%
         </div>

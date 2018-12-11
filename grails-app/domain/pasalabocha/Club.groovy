@@ -20,6 +20,9 @@ class Club extends User{
       nombre nullable: false, blank: false
       canchas minSize: 0
       email email: true
+      // esto es porque en la vista aun no se pueden captar estos dos
+      tiempoLimiteCancelacionReserva nullable: true
+      tiempoLimitePagoDeSena nullable: true
     }
 
     String toString(){
