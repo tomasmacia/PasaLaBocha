@@ -19,7 +19,9 @@ class BootStrap {
               nivelConfiabilidadNecesario: 10,
               porcentajeSena: 40,
               tiempoLimiteCancelacionReserva: Duration.ofHours(1),
-              tiempoLimitePagoDeSena: Duration.ofHours(2)
+              tiempoLimitePagoDeSena: Duration.ofHours(2),
+              username: 'river',
+              password: '1234'
       ]).save(failOnError: true)
 
       Club clubDos = new Club([
@@ -29,7 +31,9 @@ class BootStrap {
               nivelConfiabilidadNecesario: 10,
               porcentajeSena: 40,
               tiempoLimiteCancelacionReserva: Duration.ofHours(1),
-              tiempoLimitePagoDeSena: Duration.ofHours(2)
+              tiempoLimitePagoDeSena: Duration.ofHours(2),
+              username: 'boca',
+              password: '1234'
       ]).save(failOnError: true)
 
       Cancha canchaUno = new Cancha([
@@ -70,10 +74,20 @@ class BootStrap {
         def usuarioRole = new Role(authority: 'ROLE_USUARIO').save()
 
         def testAdmin = new User(username: 'admin', password: 'admin').save()
-        def testClub = new User(username: 'river', password: '1234', club: clubUno).save()
+        //def testClub = new User(username: 'river', password: '1234', club: clubUno).save()
+        def testCliente = new Cliente(
+          nombre: "jose",
+          apellido: "argento",
+          email: "jose.argento@gmail.com",
+          apodo: "pepe",
+          nivelConfiabilidad: 0,
+          username: 'pepe',
+          password: '1234').save()
 
         UserRole.create testAdmin, adminRole
-        UserRole.create testClub, clubRole
+        UserRole.create clubUno, clubRole
+        UserRole.create clubDos, clubRole
+        UserRole.create testCliente, usuarioRole
 
         UserRole.withSession {
             it.flush()

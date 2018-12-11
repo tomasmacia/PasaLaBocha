@@ -1,6 +1,8 @@
 package pasalabocha
 
-class Cliente {
+import pasalabocha.login.User
+
+class Cliente extends User{
     String nombre
     String apellido
     String email

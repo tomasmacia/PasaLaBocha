@@ -1,8 +1,9 @@
 package pasalabocha
 
 import java.time.Duration
+import pasalabocha.login.User
 
-class Club {
+class Club extends User{
     String nombre
     String email
     String ubicacion

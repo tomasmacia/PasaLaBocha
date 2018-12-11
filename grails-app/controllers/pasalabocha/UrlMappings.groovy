@@ -11,7 +11,7 @@ class UrlMappings {
 //        "/club/$clubId"(controller: "club", action: "show")
 //        "/cancha/$canchaId"(controller: "cancha", action: "show")
 
-        "/"(view:"/index")
+        "/"(controller:"home")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
