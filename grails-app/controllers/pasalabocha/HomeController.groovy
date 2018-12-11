@@ -6,16 +6,16 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['permitAll'])
 class HomeController {
 
+    LoginService loginService
+
     def index() {
-      if (isLoggedIn()) {
-         Set<Role> roles = authenticatedUser.getAuthorities()
-         if (roles.contains(new Role(authority: 'ROLE_USUARIO'))){
+      if (loginService.esCliente(loggedIn, authenticatedUser)) {
            Cliente cliente = authenticatedUser
            println(cliente.nombre)
-         } else if (roles.contains(new Role(authority: 'ROLE_CLUB'))){
+           println(authenticatedUser.nombre)
+      } else if (loginService.esClub(loggedIn, authenticatedUser)){
            Club club = authenticatedUser
            println(club)
-         }
       }
     }
 }
