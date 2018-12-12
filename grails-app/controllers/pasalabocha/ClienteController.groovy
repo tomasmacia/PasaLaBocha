@@ -24,6 +24,12 @@ class ClienteController {
         respond new Cliente(params)
     }
 
+    @Secured(['ROLE_CLIENTE'])
+    def miCliente(){
+      Cliente cliente = authenticatedUser
+      redirect(action:"show", params: [id: cliente.id])
+    }
+
     def save(Cliente cliente) {
         if (cliente == null) {
             notFound()

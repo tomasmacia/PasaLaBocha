@@ -8,9 +8,9 @@ import grails.plugin.springsecurity.annotation.Secured
 class ClubController {
 
     ClubService clubService
-    ClienteService clienteService
+    //LoginService loginService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", agregarClienteHabitual: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -32,7 +32,7 @@ class ClubController {
     }
 
     def agregarClienteHabitualForm(Long id){
-      respond clienteService.list(), model:[id:id]
+      respond Cliente.list(), model:[id:id]
     }
 
     def agregarClienteHabitual(Long id, String username){
@@ -47,6 +47,12 @@ class ClubController {
       Cliente cliente = Cliente.findByUsername(username)
       clubService.eliminarClienteHabitual(id, cliente)
       redirect(action:"verClientesHabituales", params: [id: id])
+    }
+
+    @Secured(['ROLE_CLUB'])
+    def miClub(){
+      Club club = authenticatedUser
+      redirect(action:"show", params: [id: club.id])
     }
 
     def save(Club club) {

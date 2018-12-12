@@ -44,7 +44,7 @@
             %{--<div class="android-navigation-container">--}%
                 <nav class="mdl-navigation">
                     <sec:ifLoggedIn>
-                      <a class="mdl-navigation__link mdl-typography--text-uppercase" href=""><sec:username/></a>
+                      <a class="mdl-navigation__link mdl-typography--text-uppercase" href="http://localhost:8080/home/miCuenta"><sec:username/></a>
                       <a class="mdl-navigation__link mdl-typography--text-uppercase" href="http://localhost:8080/logout">Cerrar sesión</a>
                     </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
