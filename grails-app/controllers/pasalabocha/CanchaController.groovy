@@ -54,6 +54,20 @@ class CanchaController {
         redirect(action:"verTurnos", params: [id: turno.cancha.id])
     }
 
+    def eliminarTurno(Long cancha_id, Long turno_id){
+      Turno turno = Turno.findById(turno_id)
+      canchaService.eliminarTurno(cancha_id, turno)
+      redirect(controller:"club", action:"misReservas")
+    }
+
+    def eliminarClienteHabitual(Long id, String username){
+      println(username)
+      println(id)
+      Cliente cliente = Cliente.findByUsername(username)
+      clubService.eliminarClienteHabitual(id, cliente)
+      redirect(action:"verClientesHabituales", params: [id: id])
+    }
+
     def save(Cancha cancha) {
         if (cancha == null) {
             notFound()

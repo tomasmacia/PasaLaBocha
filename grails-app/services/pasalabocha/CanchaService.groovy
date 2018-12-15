@@ -36,4 +36,12 @@ abstract class CanchaService {
       }
     }
 
+    @Transactional
+    void eliminarTurno(cancha_id, turno){
+      Cancha cancha = get(cancha_id)
+      cancha.removeFromTurnos(turno)
+      turno.delete(failOnError: true)
+      cancha.save(failOnError: true, flush: true)
+    }
+
 }

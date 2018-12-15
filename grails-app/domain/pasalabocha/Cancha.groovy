@@ -36,7 +36,7 @@ class Cancha {
     def concretar(Turno turno){
       turno.concretar()
       this.removeFromTurnos(turno)
-      //turno.delete(failOnError: true)
-      //this.save(failOnError: true)
+      //turno.delete(failOnError: true, flush: true)
+      this.save(failOnError: true)
     }
 }

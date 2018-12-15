@@ -25,7 +25,7 @@
             </td>
             <td>${reserva.precioFinal - reserva.sena?.monto ?: 0}</td>
             <td>
-                <g:link controller="reserva" action="concretar" params="[id:reserva.id]">Concretar</g:link>
+                <g:link controller="cancha" action="eliminarTurno" params="[cancha_id:reserva.turno.cancha.id, turno_id: reserva.turno.id]">Concretar</g:link>
             </td>
           </tr>
         </g:each>
