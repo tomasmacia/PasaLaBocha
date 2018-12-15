@@ -54,9 +54,9 @@ class CanchaController {
         redirect(action:"verTurnos", params: [id: turno.cancha.id])
     }
 
-    def eliminarTurno(Long cancha_id, Long turno_id){
-      Turno turno = Turno.findById(turno_id)
-      canchaService.eliminarTurno(cancha_id, turno)
+    private eliminarTurno(Long canchaId, Long turnoId){
+      Turno turno = Turno.get(turnoId)
+      canchaService.eliminarTurno(canchaId, turno)
       redirect(controller:"club", action:"misReservas")
     }
 
@@ -66,6 +66,16 @@ class CanchaController {
       Cliente cliente = Cliente.findByUsername(username)
       clubService.eliminarClienteHabitual(id, cliente)
       redirect(action:"verClientesHabituales", params: [id: id])
+    }
+
+    def asistenciaCumplida(Long canchaId, Long turnoId) {
+        // decorar con nivel confiabilidad
+        eliminarTurno(canchaId, turnoId)
+    }
+
+    def asistenciaIncumplida(Long canchaId, Long turnoId) {
+        // decorar con nivel confiabilidad
+        eliminarTurno(canchaId, turnoId)
     }
 
     def save(Cancha cancha) {

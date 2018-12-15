@@ -28,12 +28,9 @@ class ReservaController {
     def concretar(){
       Reserva reserva = reservaService.get(params.id)
       Cancha cancha = reserva.turno.cancha
-      //cancha.removeFromTurnos(reserva.turno)
-      //cancha.save(failOnError:true, flush:true)
       reserva.turno.delete(failOnError: true, flush: true)
       cancha.save(failOnError:true, flush:true)
 
-      //reserva.turno.cancha.concretar(reserva.turno)
       redirect(controller: "club", action:"misReservas")
     }
 
