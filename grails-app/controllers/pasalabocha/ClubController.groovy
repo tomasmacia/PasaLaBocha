@@ -8,7 +8,6 @@ import grails.plugin.springsecurity.annotation.Secured
 class ClubController {
 
     ClubService clubService
-    //LoginService loginService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", agregarClienteHabitual: "POST"]
 
@@ -53,6 +52,13 @@ class ClubController {
     def miClub(){
       Club club = authenticatedUser
       redirect(action:"show", params: [id: club.id])
+    }
+
+    @Secured(['ROLE_CLUB'])
+    def misReservas(){
+      Club club = authenticatedUser
+      println(club.reservas)
+      respond club.reservas
     }
 
     def save(Club club) {

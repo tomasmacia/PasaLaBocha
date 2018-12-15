@@ -30,6 +30,6 @@ class Cancha {
     }
 
     String toString(){
-      "${club}: ${numeroDeCancha}"
+      "Cancha ${numeroDeCancha}"
     }
 }

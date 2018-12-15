@@ -15,7 +15,7 @@ class Club extends User{
     List<Cancha> canchas
     Set<Cliente> clientesHabituales
 
-    static hasMany = [canchas: Cancha, clientesHabituales: Cliente]
+    static hasMany = [canchas: Cancha, clientesHabituales: Cliente, reservas: Reserva]
 
     static constraints = {
       nombre nullable: false, blank: false
@@ -25,6 +25,9 @@ class Club extends User{
       tiempoLimiteCancelacionReserva nullable: true
       tiempoLimitePagoDeSena nullable: true
     }
+
+    static mapping = {
+   }
 
     String toString(){
       nombre

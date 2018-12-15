@@ -12,6 +12,8 @@ class Reserva {
     // responder a franco
     Integer nroReserva
     Turno turno
+    //intente hacer un one-to-many unidirecional pero el addToReservas no actualizaba la join table
+    Club club
 
     static hasOne = [sena: Sena]
 
@@ -25,6 +27,7 @@ class Reserva {
 
     public Reserva(Turno turno, Cliente cliente, BigDecimal precio, LocalDateTime plazoLimiteCancelacion){
       this.turno = turno
+      this.club = turno.cancha.club
       this.cliente = cliente
       this.precioFinal = precio
       this.plazoLimiteCancelacion = plazoLimiteCancelacion

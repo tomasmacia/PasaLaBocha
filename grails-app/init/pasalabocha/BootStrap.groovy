@@ -65,6 +65,15 @@ class BootStrap {
               cancha: canchaUno,
       ]).save(failOnError: true)
 
+      LocalTime la1 = LocalTime.of(13,0,0);
+      def turno2 = new Turno([
+              fecha: hoy,
+              horario: la1,
+              duracion: unaHora,
+              precioBase: 500,
+              cancha: canchaUno,
+      ]).save(failOnError: true)
+
 //        clubService.registrarCanchas(clubUno.id, Arrays.asList(canchaUno, canchaDos))
       System.out.println(clubUno.canchas)
 

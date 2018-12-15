@@ -20,4 +20,12 @@ class Sena {
       this.plazoLimitePago = LocalDateTime.now() + tiempoLimitePagoDeSena
       this.monto = monto
     }
+
+    String toString(){
+      String pagadaString = "impaga"
+      if (pagada){
+        pagadaString = "pagada"
+      }
+      "${monto} ${pagadaString}"
+    }
 }
