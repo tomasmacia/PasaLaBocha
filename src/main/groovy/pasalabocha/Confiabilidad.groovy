@@ -15,6 +15,7 @@ class Confiabilidad implements Comparable {
     Confiabilidad aumentar() {
         return new Confiabilidad(nivel + UNIDAD)
     }
+
     Confiabilidad disminuir() {
         if (nivel == 0) {
             return this
