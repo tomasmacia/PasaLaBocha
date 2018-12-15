@@ -7,7 +7,6 @@ class Reserva {
     BigDecimal precioFinal
     // lo dejo pero recordar que dijeron que no era necesario incluir esta historia de usuario
     LocalDateTime plazoLimiteCancelacion
-    boolean concretada = false
     // cual seria la diferencia con el id que genera grails?
     // responder a franco
     Integer nroReserva
@@ -38,5 +37,14 @@ class Reserva {
         this.sena = new Sena(this, tiempoLimitePagoDeSena, precio * this.turno.cancha.club.porcentajeSena / 100)
         this.sena.save(failOnError: true)
       }
+    }
+
+    def concretar(){
+      //LocalDateTime ahora = LocalDateTime.now()
+      //LocalDateTime terminaTurno = LocalDateTime.of(this.turno.fecha, this.turno.horario) + (this.turno.duracion)
+      //if (ahora.isAfter(terminaTurno)){
+        //this.cliente.aumentarConfiabilidad()
+        //this.turno.concretar()
+      //}
     }
 }

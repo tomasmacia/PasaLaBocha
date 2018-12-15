@@ -32,4 +32,11 @@ class Cancha {
     String toString(){
       "Cancha ${numeroDeCancha}"
     }
+
+    def concretar(Turno turno){
+      turno.concretar()
+      this.removeFromTurnos(turno)
+      //turno.delete(failOnError: true)
+      //this.save(failOnError: true)
+    }
 }

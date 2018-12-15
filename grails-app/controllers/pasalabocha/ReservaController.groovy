@@ -24,6 +24,13 @@ class ReservaController {
         respond new Reserva(params)
     }
 
+    @Secured(['ROLE_CLUB'])
+    def concretar(){
+      Reserva reserva = reservaService.get(params.id)
+      reserva.turno.cancha.concretar(reserva.turno)
+      redirect(controller: "club", action:"misReservas")
+    }
+
     def save(Reserva reserva) {
         if (reserva == null) {
             notFound()

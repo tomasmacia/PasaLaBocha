@@ -12,7 +12,6 @@
           <th>Precio total</th>
           <th>Seña</th>
           <th>Precio restante</th>
-          <th>Concretar</th>
         </tr>
         <g:each in="${reservaSet}" var="reserva">
           <tr>
@@ -24,9 +23,6 @@
               </g:if>
             </td>
             <td>${reserva.precioFinal - reserva.sena?.monto ?: 0}</td>
-            <td>
-                <g:link controller="reserva" action="concretar" params="[id:reserva.id]">Concretar</g:link>
-            </td>
           </tr>
         </g:each>
       </table>
