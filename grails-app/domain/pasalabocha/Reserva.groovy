@@ -32,19 +32,10 @@ class Reserva {
       this.plazoLimiteCancelacion = plazoLimiteCancelacion
       Integer nivelConfiabilidadNecesario = turno.cancha.club.nivelConfiabilidadNecesario
       Set<Cliente> clientesHabituales = turno.cancha.club.clientesHabituales
-      if (cliente.nivelConfiabilidad < nivelConfiabilidadNecesario && !clientesHabituales.contains(cliente)){
+      if (!cliente.esConfiable(nivelConfiabilidadNecesario) && !clientesHabituales.contains(cliente)){
         Duration tiempoLimitePagoDeSena = turno.cancha.club.tiempoLimitePagoDeSena
         this.sena = new Sena(this, tiempoLimitePagoDeSena, precio * this.turno.cancha.club.porcentajeSena / 100)
         this.sena.save(failOnError: true)
       }
-    }
-
-    def concretar(){
-      //LocalDateTime ahora = LocalDateTime.now()
-      //LocalDateTime terminaTurno = LocalDateTime.of(this.turno.fecha, this.turno.horario) + (this.turno.duracion)
-      //if (ahora.isAfter(terminaTurno)){
-        //this.cliente.aumentarConfiabilidad()
-        //this.turno.concretar()
-      //}
     }
 }

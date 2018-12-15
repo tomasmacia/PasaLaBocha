@@ -37,9 +37,4 @@ class Turno {
       //this.cancha.club.save(failOnError: true)
       println(this.cancha.club.reservas)
     }
-
-    def concretar(){
-      this.reserva.concretar()
-      //this.delete(failOnError: true, flush: true)
-    }
 }

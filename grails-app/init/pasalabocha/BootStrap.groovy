@@ -89,7 +89,7 @@ class BootStrap {
           apellido: "argento",
           email: "jose.argento@gmail.com",
           apodo: "pepe",
-          nivelConfiabilidad: 0,
+          confiabilidad: new Confiabilidad(0),
           username: 'pepe',
           password: '1234').save()
 

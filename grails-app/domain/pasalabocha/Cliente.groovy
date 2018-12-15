@@ -8,7 +8,9 @@ class Cliente extends User{
     String apellido
     String email
     String apodo
-    Integer nivelConfiabilidad = 0
+    Confiabilidad confiabilidad
+
+    static embedded = ['confiabilidad']
 
     static hasMany = [reservas: Reserva]
 
@@ -19,9 +21,7 @@ class Cliente extends User{
       apodo nullable: true, blank: true
     }
 
-    //@Transactional
-    def aumentarConfiabilidad(){
-      this.nivelConfiabilidad = this.nivelConfiabilidad + 1
-      this.save(failOnError: true)
+    public boolean esConfiable(int nivelNecesario) {
+        return confiabilidad.satisface(nivelNecesario)
     }
 }
