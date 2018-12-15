@@ -10,6 +10,7 @@ import java.time.LocalTime
 class CanchaController {
 
     CanchaService canchaService
+    ClienteService clienteService
     TurnoService turnoService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", generarTurnos: "POST"]
