@@ -8,7 +8,7 @@
     <body>
       <table style="width:100%">
         <tr>
-          <th>Fecha y horario</th>
+          <th>Fecha</th>
           <th>Horario</th>
           <th>Duración[minutos]</th>
           <th>Precio</th>

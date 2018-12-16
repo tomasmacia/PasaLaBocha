@@ -3,6 +3,7 @@ package pasalabocha
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
+import java.time.Duration
 
 @Secured(['permitAll'])
 class ClubController {
@@ -67,6 +68,8 @@ class ClubController {
     }
 
     def save(Club club) {
+        club.tiempoLimitePagoDeSena = Duration.ofMinutes(Long.valueOf(params.tiempoSena))
+        club.tiempoLimiteCancelacionReserva = Duration.ofMinutes(Long.valueOf(params.tiempoCancelacion))
         if (club == null) {
             notFound()
             return
