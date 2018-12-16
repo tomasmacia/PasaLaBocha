@@ -25,6 +25,11 @@ class ClubController {
         respond new Club(params)
     }
 
+    def verCanchas(Long id){
+        Club club = clubService.get(id)
+        respond (club.canchas)
+    }
+
     def verClientesHabituales(Long id){
       Club club = clubService.get(id)
       println(club.clientesHabituales)
