@@ -36,16 +36,23 @@ class CanchaController {
 
     }
 
-    def generarTurno(){
-        LocalDateTime fechaHorario = LocalDateTime.parse(params.horario.toString())
-        Duration duracion = Duration.ofMinutes(Long.valueOf(params.duracion.toString()))
-        canchaService.generarTurno(Long.valueOf(params.id.toString()), fechaHorario, duracion, Long.valueOf(params.precio.toString()))
-
-      redirect(action: "show", params: [id: params.id])
-    }
+//    def generarTurno(){
+//        LocalDateTime fechaHorario = LocalDateTime.parse(params.horario.toString())
+//        Duration duracion = Duration.ofMinutes(Long.valueOf(params.duracion.toString()))
+//        canchaService.generarTurno(Long.valueOf(params.id.toString()), fechaHorario, duracion, Long.valueOf(params.precio.toString()))
+//
+//      redirect(action: "show", params: [id: params.id])
+//    }
 
     def generarTurnos() {
-
+        List<LocalDateTime> fechas = params.findAll{ param ->
+            param.key.toString().startsWith("horario-")
+        }.collect { param ->
+            LocalDateTime.parse(param.value.toString())
+        }
+        Duration duracion = Duration.ofMinutes(Long.valueOf(params.duracion.toString()))
+        canchaService.generarTurnos(Long.valueOf(params.id.toString()), fechas, duracion, Long.valueOf(params.precio.toString()))
+        redirect(action: "show", params: [id: params.id])
     }
 
     @Secured(['ROLE_CLIENTE'])

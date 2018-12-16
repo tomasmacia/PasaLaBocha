@@ -21,31 +21,27 @@ abstract class CanchaService {
     protected abstract Cancha save(Cancha cancha)
 
 //    @Transactional
-//    void generarTurnos(Long id, LocalTime horarioInicio, LocalTime horarioFin, Duration largoTurno, Long precio){
-//      horarioInicio = horarioInicio + largoTurno
-//      Cancha cancha = get(id)
-//      LocalDate hoy = LocalDate.now();
-//      while (horarioInicio.isBefore(horarioFin)){
-//        def turno = new Turno([
-//                fecha: hoy,
-//                horario: horarioInicio,
-//                duracion: largoTurno,
+//    void generarTurno(Long id, LocalDateTime fechaHorario, Duration duracion, Long precio) {
+//        Cancha cancha = get(id)
+//        Turno turno = new Turno([
+//                fechaHorario: fechaHorario,
+//                duracion: duracion,
 //                precioBase: precio,
 //                cancha: cancha,
 //        ]).save(failOnError: true)
-//        horarioInicio = horarioInicio + largoTurno
-//      }
 //    }
 
     @Transactional
-    void generarTurno(Long id, LocalDateTime fechaHorario, Duration duracion, Long precio) {
+    void generarTurnos(Long id, List<LocalDateTime> fechas, Duration duracion, Long precio) {
         Cancha cancha = get(id)
-        Turno turno = new Turno([
-                fechaHorario: fechaHorario,
-                duracion: duracion,
-                precioBase: precio,
-                cancha: cancha,
-        ]).save(failOnError: true)
+        fechas.each{ fecha ->
+            new Turno([
+                    fechaHorario: fecha,
+                    duracion: duracion,
+                    precioBase: precio,
+                    cancha: cancha,
+            ]).save(failOnError: true)
+        }
     }
 
     @Transactional
