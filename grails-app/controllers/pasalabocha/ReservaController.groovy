@@ -8,6 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class ReservaController {
 
     ReservaService reservaService
+    SenaService senaService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -25,12 +26,9 @@ class ReservaController {
     }
 
     @Secured(['ROLE_CLUB'])
-    def concretar(){
-      Reserva reserva = reservaService.get(params.id)
-      Cancha cancha = reserva.turno.cancha
-      reserva.turno.delete(failOnError: true, flush: true)
-      cancha.save(failOnError:true, flush:true)
-
+    def pagarSena(Long reservaId){
+      Reserva reserva = reservaService.get(reservaId)
+      senaService.pagar(reserva.sena)
       redirect(controller: "club", action:"misReservas")
     }
 

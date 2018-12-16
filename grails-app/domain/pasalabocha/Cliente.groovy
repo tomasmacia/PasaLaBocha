@@ -21,10 +21,6 @@ class Cliente extends User{
       apodo nullable: true, blank: true
     }
 
-    static mapping = {
-      version false
-    }
-
     public boolean esConfiable(int nivelNecesario) {
         return confiabilidad.satisface(nivelNecesario)
     }

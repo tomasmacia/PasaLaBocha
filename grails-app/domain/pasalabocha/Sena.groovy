@@ -28,4 +28,8 @@ class Sena {
       }
       "${monto} ${pagadaString}"
     }
+
+    void pagar(){
+      this.pagada = true
+    }
 }
