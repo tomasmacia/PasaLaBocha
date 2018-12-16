@@ -8,6 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class SenaController {
 
     SenaService senaService
+    ReservaService reservaService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -22,6 +23,14 @@ class SenaController {
 
     def create() {
         respond new Sena(params)
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def chequearPagos(){
+        def senas = senaService.list()
+        senas = senas.grep {it.estaVencida()}
+        reservaService.eliminarReservas(senas.collect {it.reserva})
+        redirect(action:"index")
     }
 
     def save(Sena sena) {

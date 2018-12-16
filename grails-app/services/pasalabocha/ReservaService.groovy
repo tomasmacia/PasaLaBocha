@@ -1,18 +1,24 @@
 package pasalabocha
 
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
 
 @Service(Reserva)
-interface ReservaService {
+abstract class ReservaService {
 
-    Reserva get(Serializable id)
+    protected abstract Reserva get(Serializable id)
 
-    List<Reserva> list(Map args)
+    protected abstract List<Reserva> list(Map args)
 
-    Long count()
+    protected abstract Long count()
 
-    void delete(Serializable id)
+    protected abstract void delete(Serializable id)
 
-    Reserva save(Reserva reserva)
+    protected abstract Reserva save(Reserva reserva)
+
+    @Transactional
+    void eliminarReservas(List<Reserva> reservas){
+        reservas.each {it.delete(flush:true, failOnError:true)}
+    }
 
 }

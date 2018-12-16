@@ -20,7 +20,7 @@ class BootStrap {
               nivelConfiabilidadNecesario: 10,
               porcentajeSena: 40,
               tiempoLimiteCancelacionReserva: Duration.ofHours(1),
-              tiempoLimitePagoDeSena: Duration.ofHours(2),
+              tiempoLimitePagoDeSena: Duration.ofSeconds(10),
               username: 'river',
               password: '1234'
       ]).save(failOnError: true)
@@ -55,6 +55,15 @@ class BootStrap {
               club: clubUno,
       ]).save(failOnError: true)
 
+      Cancha canchaTres = new Cancha([
+              dimensiones: new Dimensiones(ancho: "35", largo: "65"),
+              tipoSuelo: TipoSuelo.CESPED_SINTETICO,
+              numeroDeCancha: 1,
+              poseeIluminacion: true,
+              cantidadJugadores: 14,
+              club: clubDos,
+      ]).save(failOnError: true)
+
       LocalDate hoy = LocalDate.now();
       LocalTime las12 = LocalTime.of(12,0,0);
       Duration unaHora = Duration.ofHours(1);
@@ -75,6 +84,13 @@ class BootStrap {
               cancha: canchaUno,
       ]).save(failOnError: true)
 
+      def turno3 = new Turno([
+              fechaHorario: primeroEnero12hs,
+              duracion: unaHora,
+              precioBase: 500,
+              cancha: canchaTres,
+      ]).save(failOnError: true)
+
 //        clubService.registrarCanchas(clubUno.id, Arrays.asList(canchaUno, canchaDos))
       System.out.println(clubUno.canchas)
 
@@ -84,7 +100,6 @@ class BootStrap {
         def clienteRole = new Role(authority: 'ROLE_CLIENTE').save()
 
         def testAdmin = new User(username: 'admin', password: 'admin').save()
-        //def testClub = new User(username: 'river', password: '1234', club: clubUno).save()
         def testCliente = new Cliente(
           nombre: "jose",
           apellido: "argento",
@@ -103,7 +118,6 @@ class BootStrap {
             it.flush()
             it.clear()
         }
-
     }
     def destroy = {
     }

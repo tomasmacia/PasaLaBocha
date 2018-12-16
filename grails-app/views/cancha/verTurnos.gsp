@@ -8,7 +8,7 @@
     <body>
       <table style="width:100%">
         <tr>
-          <th>Fecha</th>
+          <th>Fecha y horario</th>
           <th>Horario</th>
           <th>Duración[minutos]</th>
           <th>Precio</th>
@@ -16,8 +16,8 @@
         </tr>
         <g:each in="${turnoList}" var="turno">
           <tr>
-            <td>${turno.fecha}</td>
-            <td>${turno.horario}</td>
+            <td>${turno.fechaHorario.toLocalDate()}</td>
+            <td>${turno.fechaHorario.toLocalTime()}</td>
             <td>${turno.duracion.toMinutes()}</td>
             <td>${turno.precioBase}</td>
             <g:if test="${turno.reserva != null}">

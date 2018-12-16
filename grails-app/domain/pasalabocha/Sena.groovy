@@ -21,15 +21,15 @@ class Sena {
       this.monto = monto
     }
 
+    boolean estaVencida(){
+        this.pagada == false && this.plazoLimitePago.isBefore(LocalDateTime.now())
+    }
+
     String toString(){
       String pagadaString = "impaga"
       if (pagada){
         pagadaString = "pagada"
       }
       "${monto} ${pagadaString}"
-    }
-
-    void pagar(){
-      this.pagada = true
     }
 }
