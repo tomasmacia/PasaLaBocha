@@ -1,7 +1,8 @@
 package pasalabocha
 
 import pasalabocha.login.*
-import java.time.LocalDate;
+import java.time.LocalDate
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Duration;
 
@@ -57,9 +58,10 @@ class BootStrap {
       LocalDate hoy = LocalDate.now();
       LocalTime las12 = LocalTime.of(12,0,0);
       Duration unaHora = Duration.ofHours(1);
+      LocalDateTime primeroEnero10hs= LocalDateTime.parse("2019-01-01T10:00:00")
+      LocalDateTime primeroEnero12hs= LocalDateTime.parse("2019-01-01T12:00:00")
       def turno1 = new Turno([
-              fecha: hoy,
-              horario: las12,
+              fechaHorario: primeroEnero10hs,
               duracion: unaHora,
               precioBase: 500,
               cancha: canchaUno,
@@ -67,8 +69,7 @@ class BootStrap {
 
       LocalTime la1 = LocalTime.of(13,0,0);
       def turno2 = new Turno([
-              fecha: hoy,
-              horario: la1,
+              fechaHorario: primeroEnero12hs,
               duracion: unaHora,
               precioBase: 500,
               cancha: canchaUno,

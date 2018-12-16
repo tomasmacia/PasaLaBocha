@@ -3,6 +3,7 @@ package pasalabocha
 import grails.gorm.services.Service
 import java.time.Duration
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 import grails.gorm.transactions.Transactional
 
@@ -19,21 +20,32 @@ abstract class CanchaService {
 
     protected abstract Cancha save(Cancha cancha)
 
+//    @Transactional
+//    void generarTurnos(Long id, LocalTime horarioInicio, LocalTime horarioFin, Duration largoTurno, Long precio){
+//      horarioInicio = horarioInicio + largoTurno
+//      Cancha cancha = get(id)
+//      LocalDate hoy = LocalDate.now();
+//      while (horarioInicio.isBefore(horarioFin)){
+//        def turno = new Turno([
+//                fecha: hoy,
+//                horario: horarioInicio,
+//                duracion: largoTurno,
+//                precioBase: precio,
+//                cancha: cancha,
+//        ]).save(failOnError: true)
+//        horarioInicio = horarioInicio + largoTurno
+//      }
+//    }
+
     @Transactional
-    void generarTurnos(Long id, LocalTime horarioInicio, LocalTime horarioFin, Duration largoTurno, Long precio){
-      horarioInicio = horarioInicio + largoTurno
-      Cancha cancha = get(id)
-      LocalDate hoy = LocalDate.now();
-      while (horarioInicio.isBefore(horarioFin)){
-        def turno = new Turno([
-                fecha: hoy,
-                horario: horarioInicio,
-                duracion: largoTurno,
+    void generarTurno(Long id, LocalDateTime fechaHorario, Duration duracion, Long precio) {
+        Cancha cancha = get(id)
+        Turno turno = new Turno([
+                fechaHorario: fechaHorario,
+                duracion: duracion,
                 precioBase: precio,
                 cancha: cancha,
         ]).save(failOnError: true)
-        horarioInicio = horarioInicio + largoTurno
-      }
     }
 
     @Transactional

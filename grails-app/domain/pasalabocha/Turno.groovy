@@ -6,8 +6,7 @@ import java.time.LocalTime
 import java.time.LocalDateTime
 
 class Turno {
-    LocalDate fecha
-    LocalTime horario
+    LocalDateTime fechaHorario
     Duration duracion
     BigDecimal precioBase
 
@@ -22,13 +21,13 @@ class Turno {
     }
 
     String toString(){
-      "${cancha}: ${fecha}, ${horario}, ${duracion.toMinutes()} minutos"
+      "${cancha}: ${fechaHorario}, ${duracion.toMinutes()} minutos"
     }
 
     def reservar(Cliente cliente){
       //modificar precioBase cuando esten los descuentos
       Duration tiempoLimiteCancelacionReserva = this.cancha.club.tiempoLimiteCancelacionReserva
-      LocalDateTime plazoLimiteCancelacion = LocalDateTime.of(this.fecha, this.horario)
+      LocalDateTime plazoLimiteCancelacion = fechaHorario
       plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
       Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
       reserva = new Reserva(this, cliente, this.precioBase, plazoLimiteCancelacion).save(failOnError: true)

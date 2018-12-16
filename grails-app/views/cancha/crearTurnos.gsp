@@ -1,3 +1,4 @@
+<%@ page import="java.time.LocalDateTime" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,15 +7,16 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-      <h1> ${params}</h1>
-        <g:form name="crearTurnos" action="generarTurnos" controller="cancha" params="[id: params.id]">
-                <fieldset class="form">
-                  <label>Horario de inicio: <input id="time" type="time" name="horarioInicio"></label><br>
-                  <label>Horario de fin: <input id="time" type="time" name="horarioFin"></label><br>
-                  <label>Duracion de los turnos: <input type="number" name="largoTurno"> minutos</label><br>
-                  <label>Precio de reserva: <input type="number" name="precio"></label><br>
-                   <input type="submit" value="Generar">
-                </fieldset>
+        <g:set var="now" value="${LocalDateTime.now().withSecond(0).withNano(0)}" />
+        <h1> Crear un único turno</h1>
+        <g:form name="crearTurno" action="generarTurno" controller="cancha" params="[id: params.id]">
+            <fieldset class="form">
+                <label>Horario: <input id="horario" type="datetime-local" name="horario" min="${now.toString()}"
+                                       max="${now.plusWeeks(3).toString()}" required></label><br>
+                <label>Duración del turno: <input type="number" name="duracion" required> minutos</label><br>
+                <label>Precio de reserva: <input type="number" name="precio" required></label><br>
+                <input type="submit" value="Generar">
+            </fieldset>
         </g:form>
     </body>
 </html>

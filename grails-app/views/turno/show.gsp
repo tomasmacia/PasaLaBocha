@@ -20,8 +20,7 @@
             <div class="message" role="status">${flash.message}</div>
             </g:if>
             <fieldset class="turno">
-              <label>Fecha: <f:display bean="turno" property="fecha"/></label><br>
-              <label>Horario: <f:display bean="turno" property="horario"/></label><br>
+              <label>Fecha: <f:display bean="turno" property="fechaHorario"/></label><br>
               <label>Duración: <f:display bean="turno" property="duracion"/></label><br>
               <label>Precio: <f:display bean="turno" property="precioBase"/></label><br>
               <g:if test="${this.turno.reserva == null}">

@@ -1,6 +1,9 @@
 package pasalabocha
 
 import grails.validation.ValidationException
+
+import java.time.LocalDateTime
+
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 import java.time.Duration
@@ -28,16 +31,21 @@ class CanchaController {
         respond new Cancha(params)
     }
 
+    @Secured(['ROLE_CLUB'])
     def crearTurnos(Long id){
+
     }
 
-    def generarTurnos(){
-      LocalTime horarioInicio = LocalTime.parse(params.horarioInicio)
-      LocalTime horarioFin = LocalTime.parse(params.horarioFin)
-      Duration largoTurno = Duration.ofMinutes(Long.valueOf(params.largoTurno))
-      canchaService.generarTurnos(Long.valueOf(params.id), horarioInicio, horarioFin, largoTurno, Long.valueOf(params.precio))
+    def generarTurno(){
+        LocalDateTime fechaHorario = LocalDateTime.parse(params.horario.toString())
+        Duration duracion = Duration.ofMinutes(Long.valueOf(params.duracion.toString()))
+        canchaService.generarTurno(Long.valueOf(params.id.toString()), fechaHorario, duracion, Long.valueOf(params.precio.toString()))
 
       redirect(action: "show", params: [id: params.id])
+    }
+
+    def generarTurnos() {
+
     }
 
     @Secured(['ROLE_CLIENTE'])
