@@ -25,8 +25,8 @@
             </td>
             <td>${reserva.precioFinal - reserva.sena?.monto ?: 0}</td>
             <td>
-                <g:link controller="cancha" action="asistenciaCumplida" params="[canchaId:reserva.turno.cancha.id, turnoId: reserva.turno.id]">Cumplida</g:link>
-                <g:link controller="cancha" action="asistenciaIncumplida" params="[canchaId:reserva.turno.cancha.id, turnoId: reserva.turno.id]">Incumplida</g:link>
+                <g:link controller="cancha" action="asistenciaCumplida" params="[canchaId:reserva.turno.cancha.id, turnoId: reserva.turno.id, clienteId: reserva.cliente.id]">Cumplida</g:link>
+                <g:link controller="cancha" action="asistenciaIncumplida" params="[canchaId:reserva.turno.cancha.id, turnoId: reserva.turno.id, , clienteId: reserva.cliente.id]">Incumplida</g:link>
             </td>
           </tr>
         </g:each>

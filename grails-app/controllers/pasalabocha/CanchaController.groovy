@@ -76,21 +76,13 @@ class CanchaController {
       redirect(controller:"club", action:"misReservas")
     }
 
-    def eliminarClienteHabitual(Long id, String username){
-      println(username)
-      println(id)
-      Cliente cliente = Cliente.findByUsername(username)
-      clubService.eliminarClienteHabitual(id, cliente)
-      redirect(action:"verClientesHabituales", params: [id: id])
-    }
-
-    def asistenciaCumplida(Long canchaId, Long turnoId) {
-        // decorar con nivel confiabilidad
+    def asistenciaCumplida(Long canchaId, Long turnoId, Long clienteId) {
+        clienteService.aumentarConfiabilidad(clienteId)
         eliminarTurno(canchaId, turnoId)
     }
 
-    def asistenciaIncumplida(Long canchaId, Long turnoId) {
-        // decorar con nivel confiabilidad
+    def asistenciaIncumplida(Long canchaId, Long turnoId, Long clienteId) {
+        clienteService.disminuirConfiabilidad(clienteId)
         eliminarTurno(canchaId, turnoId)
     }
 

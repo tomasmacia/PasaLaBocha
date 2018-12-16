@@ -19,21 +19,15 @@ abstract class ClienteService {
     @Transactional
     void aumentarConfiabilidad(Long id) {
         Cliente cliente = get(id)
-        println cliente
-        cliente.confiabilidad.nivel
-        cliente.confiabilidad.aumentar()
-        cliente.confiabilidad.nivel
-        cliente.save(failOnError: true)
+        cliente.confiabilidad = cliente.confiabilidad.aumentar()
+        cliente.save(failOnError: true, flush: true)
     }
 
     @Transactional
     void disminuirConfiabilidad(Long id) {
         Cliente cliente = get(id)
-        println cliente
-        cliente.confiabilidad.nivel
-        cliente.confiabilidad.disminuir()
-        cliente.confiabilidad.nivel
-        cliente.save(failOnError: true)
+        cliente.confiabilidad = cliente.confiabilidad.disminuir()
+        cliente.save(failOnError: true, flush: true)
     }
 
 

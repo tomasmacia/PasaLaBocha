@@ -1,18 +1,25 @@
 package pasalabocha
 
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
 
 @Service(Sena)
-interface SenaService {
+abstract class SenaService {
 
-    Sena get(Serializable id)
+    protected abstract Sena get(Serializable id)
 
-    List<Sena> list(Map args)
+    protected abstract List<Sena> list(Map args)
 
-    Long count()
+    protected abstract Long count()
 
-    void delete(Serializable id)
+    protected abstract void delete(Serializable id)
 
-    Sena save(Sena sena)
+    protected abstract Sena save(Sena sena)
+
+    @Transactional
+    void pagar(Sena sena){
+      sena.pagada = true
+      save(sena)
+    }
 
 }

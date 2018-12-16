@@ -57,7 +57,12 @@ class ClubController {
     @Secured(['ROLE_CLUB'])
     def misReservas(){
       Club club = authenticatedUser
-      println(club.reservas)
+      respond club.reservas
+    }
+
+    @Secured(['ROLE_CLUB'])
+    def misSenas(){
+      Club club = authenticatedUser
       respond club.reservas
     }
 
