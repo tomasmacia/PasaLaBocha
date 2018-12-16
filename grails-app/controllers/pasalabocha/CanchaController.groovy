@@ -26,11 +26,22 @@ class CanchaController {
     def show(Long id) {
         respond canchaService.get(id)
     }
+
     @Secured(['ROLE_CLUB'])
     def create() {
         Club club = authenticatedUser
         params.club = club
         respond new Cancha(params)
+    }
+
+    @Secured(['ROLE_CLUB'])
+    def verMisTurnos(Long canchaId) {
+        Club club = authenticatedUser
+        Cancha cancha = canchaService.get(canchaId)
+        if (!club.canchas.contains(cancha)){
+            redirect(action:"verTurnos", params:"[id:canchaId]")
+        }
+        respond cancha.turnos
     }
 
     @Secured(['ROLE_CLUB'])
@@ -60,7 +71,6 @@ class CanchaController {
     @Secured(['ROLE_CLIENTE'])
     def verTurnos(Long id){
       Cancha cancha = canchaService.get(id)
-      System.out.println(cancha.turnos)
       respond cancha.turnos
     }
 
