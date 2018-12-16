@@ -26,11 +26,10 @@
             </ul>
             </g:hasErrors>
             <h1> ${params}<h1>
-            <g:form resource="${this.cancha}" method="POST" params="[club: params.club.id]"><!-- Esto es un comentario params="${params.club}"-->
+            <g:form resource="${this.cancha}" method="POST" params="[club: params.club.id]">
                 <fieldset class="form">
                     <f:field bean="cancha" property="tipoSuelo"/>
                     <f:field bean="cancha" property="numeroDeCancha"/>
-                    <f:field bean="cancha" property="turnos"/>
                     <f:field bean="cancha" property="cantidadJugadores"/>
                     <f:field bean="cancha" property="dimensiones"/>
                     <f:field bean="cancha" property="poseeIluminacion"/>

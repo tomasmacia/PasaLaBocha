@@ -26,8 +26,10 @@ class CanchaController {
     def show(Long id) {
         respond canchaService.get(id)
     }
-
+    @Secured(['ROLE_CLUB'])
     def create() {
+        Club club = authenticatedUser
+        params.club = club
         respond new Cancha(params)
     }
 

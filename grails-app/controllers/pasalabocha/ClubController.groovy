@@ -52,7 +52,7 @@ class ClubController {
     @Secured(['ROLE_CLUB'])
     def miClub(){
       Club club = authenticatedUser
-      redirect(action:"show", params: [id: club.id])
+      respond club
     }
 
     @Secured(['ROLE_CLUB'])
@@ -65,6 +65,12 @@ class ClubController {
     def misSenas(){
       Club club = authenticatedUser
       respond club.reservas
+    }
+
+    @Secured(['ROLE_CLUB'])
+    def misCanchas(){
+      Club club = authenticatedUser
+      respond (club.canchas, model:[id:club.id])
     }
 
     def save(Club club) {
