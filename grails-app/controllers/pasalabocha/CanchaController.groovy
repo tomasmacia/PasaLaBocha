@@ -41,7 +41,7 @@ class CanchaController {
         if (!club.canchas.contains(cancha)){
             redirect(action:"verTurnos", params:"[id:canchaId]")
         }
-        respond cancha.turnos
+        respond cancha.turnos, model:[id:cancha.id]
     }
 
     @Secured(['ROLE_CLUB'])
