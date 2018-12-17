@@ -10,8 +10,6 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
         <div id="show-cliente" class="content scaffold-show" role="main">
@@ -19,7 +17,13 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="cliente" />
+            <label>Username: <f:display bean="cliente" property="username"/></label><br>
+            <label>Nombre: <f:display bean="cliente" property="nombre"/><br>
+            <label>Apellido: <f:display bean="cliente" property="apellido"/><br>
+            <label>Apodo: <f:display bean="cliente" property="apodo"/><br>
+            <label>Email: <f:display bean="cliente" property="email"/><br>
+            <label>Nivel de confiabilidad: <f:display bean="cliente" property="confiabilidad"/><br>
+            <g:link controller="cliente" action="misReservas">Ver mis reservas</g:link><br>
             <g:form resource="${this.cliente}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.cliente}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

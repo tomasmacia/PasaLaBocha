@@ -9,6 +9,9 @@ class HomeController {
     LoginService loginService
 
     def index() {
+        if (loginService.esClub(loggedIn, authenticatedUser)){
+            redirect(controller: "club", action:"miClub")
+        }
     }
 
     def createUser(){ }
