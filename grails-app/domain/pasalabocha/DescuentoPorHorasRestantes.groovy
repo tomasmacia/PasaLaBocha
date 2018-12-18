@@ -2,7 +2,7 @@ package pasalabocha
 
 import java.time.Duration
 
-class DescuentoPorHorasRestantes {
+class DescuentoPorHorasRestantes extends Descuento {
     Duration horasRestantes
 
     static constraints = {

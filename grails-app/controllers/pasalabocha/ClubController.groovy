@@ -78,6 +78,11 @@ class ClubController {
       respond (club.canchas, model:[id:club.id])
     }
 
+    @Secured(['ROLE_CLUB'])
+    def generadorDescuentos(){
+        redirect(controller: "descuento", action: "generadorDescuentos")
+    }
+
     def save(Club club) {
         club.tiempoLimitePagoDeSena = Duration.ofMinutes(Long.valueOf(params.tiempoSena))
         club.tiempoLimiteCancelacionReserva = Duration.ofMinutes(Long.valueOf(params.tiempoCancelacion))
