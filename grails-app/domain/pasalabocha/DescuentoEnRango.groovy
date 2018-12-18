@@ -1,13 +1,11 @@
 package pasalabocha
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 
-class DescuentoEnRango {
-    LocalDate fechaInicial
-    LocalTime horarioInicial
-    LocalDate fechaFinal
-    LocalTime horarioFinal
+class DescuentoEnRango extends Descuento{
+    LocalDateTime fechaInicial
+    LocalDateTime fechaFinal
 
 
     static constraints = {

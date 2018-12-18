@@ -9,6 +9,7 @@ class Turno {
     LocalDateTime fechaHorario
     Duration duracion
     BigDecimal precioBase
+    Descuento descuento
 
     static hasOne = [reserva: Reserva]
 
@@ -16,8 +17,7 @@ class Turno {
 
     static constraints = {
       reserva nullable: true
-      //duracion nullable: true
-      //horario nullable: true
+      descuento nullable: true
     }
 
     String toString(){
