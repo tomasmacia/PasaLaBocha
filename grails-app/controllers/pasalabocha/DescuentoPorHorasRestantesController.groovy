@@ -23,8 +23,8 @@ class DescuentoPorHorasRestantesController {
         respond descuentoPorHorasRestantesService.get(id)
     }
 
+    @Secured(['ROLE_CLUB'])
     def create() {
-        respond new DescuentoPorHorasRestantes(params)
     }
 
 

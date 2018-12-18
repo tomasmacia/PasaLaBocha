@@ -57,7 +57,6 @@
             <td>${descuentoPorTurnoAnterior.horasRestantes}</td>
         </tr>
     </table>
-    ${descuentoPorTurnoAnterior}
 </g:each>
 </body>
 </html>
