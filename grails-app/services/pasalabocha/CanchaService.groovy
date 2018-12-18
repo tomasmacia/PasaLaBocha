@@ -45,11 +45,19 @@ abstract class CanchaService {
     }
 
     @Transactional
-    void eliminarTurno(cancha_id, turno){
+    void eliminarTurno(Long cancha_id,Turno turno){
       Cancha cancha = get(cancha_id)
       cancha.removeFromTurnos(turno)
       turno.delete(failOnError: true)
       cancha.save(failOnError: true, flush: true)
+    }
+
+    @Transactional
+    void eliminarVencidos(List<Turno> turnos){
+        def ahora = LocalDateTime.now()
+        turnos.each {turno -> if (turno.estaVencido(ahora)){
+                                eliminarTurno(turno.cancha.id, turno)
+                              }}
     }
 
 }

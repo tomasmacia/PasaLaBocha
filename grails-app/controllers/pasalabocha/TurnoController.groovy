@@ -12,6 +12,7 @@ class TurnoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond turnoService.list(params), model:[turnoCount: turnoService.count()]

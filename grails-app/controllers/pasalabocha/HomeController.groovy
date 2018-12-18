@@ -11,6 +11,8 @@ class HomeController {
     def index() {
         if (loginService.esClub(loggedIn, authenticatedUser)){
             redirect(controller: "club", action:"miClub")
+        } else if(loginService.esAdmin(loggedIn, authenticatedUser)){
+            render(view: "adminHome")
         }
     }
 

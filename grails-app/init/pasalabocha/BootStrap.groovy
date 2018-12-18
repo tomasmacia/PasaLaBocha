@@ -64,11 +64,10 @@ class BootStrap {
               club: clubDos,
       ]).save(failOnError: true)
 
-      LocalDate hoy = LocalDate.now();
-      LocalTime las12 = LocalTime.of(12,0,0);
       Duration unaHora = Duration.ofHours(1);
-      LocalDateTime primeroEnero10hs= LocalDateTime.parse("2019-01-01T10:00:00")
-      LocalDateTime primeroEnero12hs= LocalDateTime.parse("2019-01-01T12:00:00")
+      LocalDateTime primeroEnero10hs = LocalDateTime.parse("2019-01-01T10:00:00")
+      LocalDateTime primeroEnero12hs = LocalDateTime.parse("2019-01-01T12:00:00")
+      LocalDateTime primeroDiciembre12hs = LocalDateTime.parse("2018-12-01T12:00:00")
       def turno1 = new Turno([
               fechaHorario: primeroEnero10hs,
               duracion: unaHora,
@@ -91,8 +90,12 @@ class BootStrap {
               cancha: canchaTres,
       ]).save(failOnError: true)
 
-//        clubService.registrarCanchas(clubUno.id, Arrays.asList(canchaUno, canchaDos))
-      System.out.println(clubUno.canchas)
+      def turnoVencido = new Turno([
+              fechaHorario: primeroDiciembre12hs,
+              duracion: unaHora,
+              precioBase: 500,
+              cancha: canchaTres,
+      ]).save(failOnError: true)
 
         // initializing login data
         def adminRole = new Role(authority: 'ROLE_ADMIN').save()

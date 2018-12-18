@@ -82,6 +82,13 @@ class CanchaController {
         redirect(action:"verTurnos", params: [id: turno.cancha.id])
     }
 
+    @Secured(['ROLE_ADMIN'])
+    def eliminarTurnosVencidos(){
+      List<Turno> turnos = Turno.list()
+      canchaService.eliminarVencidos(turnos)
+      redirect(controller:"turno", action:"index")
+    }
+
     private eliminarTurno(Long canchaId, Long turnoId){
       Turno turno = Turno.get(turnoId)
       canchaService.eliminarTurno(canchaId, turno)

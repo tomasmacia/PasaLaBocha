@@ -17,4 +17,12 @@ class LoginService{
     }
     false
   }
+
+  boolean esAdmin(boolean loggedIn, def authenticatedUser){
+    if (loggedIn) {
+       Set<Role> roles = authenticatedUser.getAuthorities()
+       return roles.contains(new Role(authority: 'ROLE_ADMIN'))
+    }
+    false
+  }
 }
