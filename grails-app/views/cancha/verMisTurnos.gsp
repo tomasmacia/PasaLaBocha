@@ -29,6 +29,6 @@
           </tr>
         </g:each>
       </table>
-      <g:link action="crearTurnos" id="id">Crear turnos</g:link>
+      <g:link action="crearTurnos" params="[id: params.canchaId]">Crear turnos</g:link>
     </body>
 </html>
