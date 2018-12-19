@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="layout" content="main" />
+        <meta name="layout" content="pasalabocha" />
         <g:set var="entityName" value="${message(code: 'cancha.label', default: 'Cancha')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>

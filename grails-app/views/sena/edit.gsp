@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="layout" content="main" />
+        <meta name="layout" content="pasalabocha" />
         <g:set var="entityName" value="${message(code: 'sena.label', default: 'Sena')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>

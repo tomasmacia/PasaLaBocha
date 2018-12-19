@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-amber.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <asset:stylesheet src="application.css"/>
 
 
     <g:layoutHead/>
@@ -33,12 +34,6 @@
             <!-- Add spacer, to align navigation to the right in desktop -->
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
-                    <i class="material-icons">search</i>
-                </label>
-                <div class="mdl-textfield__expandable-holder">
-                    <input class="mdl-textfield__input" type="text" id="search-field">
-                </div>
             </div>
             <!-- Navigation -->
             %{--<div class="android-navigation-container">--}%
@@ -56,18 +51,6 @@
         </div>
     </div>
 
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">
-            <asset:image src="pasalabocha.png" alt="PasaLaBocha" style="width:128px; height:128px;"/>
-        </span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Phones</a>
-            <a class="mdl-navigation__link" href="">Tablets</a>
-            <a class="mdl-navigation__link" href="">Wear</a>
-
-        </nav>
-    </div>
-
     <div class="mdl-layout__content">
         <g:layoutBody/>
     </div>
@@ -78,14 +61,8 @@
                 © 2018 PasaLaBocha
             </div>
             <ul class = "mdl-mini-footer__link-list">
-                <li><a href = "#">Contacto</a></li>
+                <li><a href = "#">Contacto: contacto@pasalabocha.com</a></li>
             </ul>
-        </div>
-
-        <div class = "mdl-mini-footer__right-section">
-            <button class = "mdl-mini-footer__social-btn">1</button>
-            <button class = "mdl-mini-footer__social-btn">2</button>
-            <button class = "mdl-mini-footer__social-btn">3</button>
         </div>
 
     </footer>
