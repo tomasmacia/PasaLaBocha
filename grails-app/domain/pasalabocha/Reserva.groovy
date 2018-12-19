@@ -38,4 +38,8 @@ class Reserva {
         this.sena.save(failOnError: true)
       }
     }
+
+    String toString(){
+     "${turno} por ${cliente}"
+    }
 }

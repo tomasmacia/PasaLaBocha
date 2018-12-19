@@ -56,7 +56,7 @@ class CanchaController {
 //
 //      redirect(action: "show", params: [id: params.id])
 //    }
-
+    @Secured(['ROLE_CLUB'])
     def generarTurnos() {
         List<LocalDateTime> fechas = params.findAll{ param ->
             param.key.toString().startsWith("horario-")
@@ -95,16 +95,19 @@ class CanchaController {
       redirect(controller:"club", action:"misReservas")
     }
 
+    @Secured(['ROLE_CLUB'])
     def asistenciaCumplida(Long canchaId, Long turnoId, Long clienteId) {
         clienteService.aumentarConfiabilidad(clienteId)
         eliminarTurno(canchaId, turnoId)
     }
 
+    @Secured(['ROLE_CLUB'])
     def asistenciaIncumplida(Long canchaId, Long turnoId, Long clienteId) {
         clienteService.disminuirConfiabilidad(clienteId)
         eliminarTurno(canchaId, turnoId)
     }
 
+    @Secured(['ROLE_CLUB'])
     def save(Cancha cancha) {
         if (cancha == null) {
             notFound()
@@ -127,10 +130,12 @@ class CanchaController {
         }
     }
 
+    @Secured(['ROLE_CLUB'])
     def edit(Long id) {
         respond canchaService.get(id)
     }
 
+    @Secured(['ROLE_CLUB'])
     def update(Cancha cancha) {
         if (cancha == null) {
             notFound()
@@ -154,6 +159,7 @@ class CanchaController {
     }
 
     // NO FUNCIONA; AL ELIMINAR SIGUE AHI
+    @Secured(['ROLE_CLUB'])
     def delete(Long id) {
         if (id == null) {
             notFound()

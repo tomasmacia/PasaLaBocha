@@ -11,6 +11,7 @@ class ClienteController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond clienteService.list(params), model:[clienteCount: clienteService.count()]
@@ -95,7 +96,7 @@ class ClienteController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'cliente.label', default: 'Cliente'), id])
-                redirect action:"index", method:"GET"
+                redirect controller:"home", action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }
