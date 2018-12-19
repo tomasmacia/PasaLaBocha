@@ -24,4 +24,8 @@ class Cliente extends User{
     public boolean esConfiable(int nivelNecesario) {
         return confiabilidad.satisface(nivelNecesario)
     }
+
+    String toString(){
+     "${username}: ${nombre} ${apellido}"
+    }
 }

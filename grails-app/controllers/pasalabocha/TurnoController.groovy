@@ -22,10 +22,7 @@ class TurnoController {
         respond turnoService.get(id)
     }
 
-    def create() {
-        respond new Turno(params)
-    }
-
+    @Secured(['ROLE_CLUB'])
     def save(Turno turno) {
         System.out.println(params)
         String[] tokens = params.fecha.split("-");
@@ -54,10 +51,12 @@ class TurnoController {
         }
     }
 
+    @Secured(['ROLE_CLUB'])
     def edit(Long id) {
         respond turnoService.get(id)
     }
 
+    @Secured(['ROLE_CLUB'])
     def update(Turno turno) {
         if (turno == null) {
             notFound()
@@ -80,6 +79,7 @@ class TurnoController {
         }
     }
 
+    @Secured(['ROLE_CLUB'])
     def delete(Long id) {
         if (id == null) {
             notFound()

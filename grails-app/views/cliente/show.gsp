@@ -17,6 +17,7 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
+            <div class="items" width=100>
             <label>Username: <f:display bean="cliente" property="username"/></label><br>
             <label>Nombre: <f:display bean="cliente" property="nombre"/><br>
             <label>Apellido: <f:display bean="cliente" property="apellido"/><br>
@@ -24,10 +25,10 @@
             <label>Email: <f:display bean="cliente" property="email"/><br>
             <label>Nivel de confiabilidad: <f:display bean="cliente" property="confiabilidad"/><br>
             <g:link controller="cliente" action="misReservas">Ver mis reservas</g:link><br>
+            </div>
             <g:form resource="${this.cliente}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.cliente}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                 </fieldset>
             </g:form>
         </div>
