@@ -1,8 +1,6 @@
 package pasalabocha
 
 import java.time.Duration
-import java.time.LocalDate
-import java.time.LocalTime
 import java.time.LocalDateTime
 
 class Turno {
@@ -30,9 +28,20 @@ class Turno {
       LocalDateTime plazoLimiteCancelacion = fechaHorario
       plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
       Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
+      BigDecimal precioFinal = this.getPrecioFinal()
 
-      reserva = new Reserva(this, cliente, this.precioBase, plazoLimiteCancelacion).save(failOnError: true)
+      reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion).save(failOnError: true)
       this.save(failOnError: true)
+    }
+
+    BigDecimal getPrecioFinal() {
+        BigDecimal precioFinal = this.precioBase
+
+        if (this.descuento && this.descuento.porcentaje) {
+            precioFinal = precioFinal * (1 - this.descuento.porcentaje / 100)
+        }
+
+        precioFinal
     }
 
     boolean estaVencido(LocalDateTime ahora){

@@ -1,18 +1,41 @@
 package pasalabocha
 
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
+import org.springframework.beans.factory.annotation.Autowired
+
+import java.time.LocalDateTime
 
 @Service(DescuentoPorHorasRestantes)
-interface DescuentoPorHorasRestantesService {
+abstract class DescuentoPorHorasRestantesService {
 
-    DescuentoPorHorasRestantes get(Serializable id)
+    @Autowired
+    DescuentoService descuentoService
 
-    List<DescuentoPorHorasRestantes> list(Map args)
+    abstract DescuentoPorHorasRestantes get(Serializable id)
 
-    Long count()
+    abstract List<DescuentoPorHorasRestantes> list(Map args)
 
-    void delete(Serializable id)
+    abstract Long count()
 
-    DescuentoPorHorasRestantes save(DescuentoPorHorasRestantes descuentoPorHorasRestantes)
+    abstract void delete(Serializable id)
+
+    abstract DescuentoPorHorasRestantes save(DescuentoPorHorasRestantes descuentoPorHorasRestantes)
+
+    @Transactional
+    def aplicar(DescuentoPorHorasRestantes descuento) {
+        Club club = descuento.club
+
+        LocalDateTime filtroFecha = LocalDateTime.now().plusHours(descuento.horasRestantes.toHours())
+
+        List<Turno> turnos = club.canchas.turnos.flatten().findAll { Turno turno ->
+            turno.fechaHorario.isBefore(filtroFecha) && !turno.descuento // si ya tiene descuento no aplico otro
+        }
+
+        println "Aplicando descuentos a los siguientes turnos -> " + turnos
+        turnos.forEach { turno ->
+            descuentoService.aplicar(turno, descuento)
+        }
+    }
 
 }
