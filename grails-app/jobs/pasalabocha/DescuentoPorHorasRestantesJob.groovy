@@ -5,7 +5,7 @@ class DescuentoPorHorasRestantesJob {
     DescuentoPorHorasRestantesService descuentoPorHorasRestantesService
 
     static triggers = {
-        cron name: 'descuentoRangoTrigger', cronExpression: "0 0/5 * * * ?"
+        cron name: 'descuentoHorasRestantesTrigger', cronExpression: "0 0/5 * * * ?" // cada 5 minutos
     }
 
     def execute() {

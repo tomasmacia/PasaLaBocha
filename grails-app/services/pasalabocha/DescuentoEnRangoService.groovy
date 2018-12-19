@@ -1,18 +1,39 @@
 package pasalabocha
 
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
+import org.springframework.beans.factory.annotation.Autowired
 
 @Service(DescuentoEnRango)
-interface DescuentoEnRangoService {
+abstract class DescuentoEnRangoService {
 
-    DescuentoEnRango get(Serializable id)
+    @Autowired
+    DescuentoService descuentoService
 
-    List<DescuentoEnRango> list(Map args)
+    abstract DescuentoEnRango get(Serializable id)
 
-    Long count()
+    abstract List<DescuentoEnRango> list(Map args)
 
-    void delete(Serializable id)
+    abstract Long count()
 
-    DescuentoEnRango save(DescuentoEnRango descuentoEnRango)
+    abstract void delete(Serializable id)
+
+    abstract DescuentoEnRango save(DescuentoEnRango descuentoEnRango)
+
+    @Transactional
+    def aplicar(DescuentoEnRango descuento) {
+        Club club = descuento.club
+
+        List<Turno> turnos = club.canchas.turnos.flatten().findAll { Turno turno ->
+            turno.fechaHorario.isAfter(descuento.fechaInicial) &&
+            turno.fechaHorario.isBefore(descuento.fechaFinal) &&
+            !turno.descuento // si ya tiene descuento no aplico otro
+        }
+
+        println "Aplicando descuentos a los siguientes turnos -> " + turnos
+        turnos.forEach { turno ->
+            descuentoService.aplicar(turno, descuento)
+        }
+    }
 
 }

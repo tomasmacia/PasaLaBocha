@@ -33,8 +33,10 @@ class DescuentoEnRangoController {
         DescuentoEnRango descuento = new DescuentoEnRango([club:club, porcentaje: params["porcentaje"],
                                             nivelConfiabilidadNecesario: params["nivelConfiabilidadNecesario"],
                                                 fechaInicial: fechaInicial, fechaFinal: fechaFinal])
-        //clubService.aplicarDescuentos(club, descuento)
         save(descuento)
+
+        // lo aplico apenas lo creo y despues corro un job para actualizar nuevos turnos en en el rango horario
+        descuentoEnRangoService.aplicar(descuento)
     }
 
     private save(DescuentoEnRango descuentoEnRango) {
