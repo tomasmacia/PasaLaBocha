@@ -19,7 +19,14 @@
             <td>${turno.fechaHorario.toLocalDate()}</td>
             <td>${turno.fechaHorario.toLocalTime()}</td>
             <td>${turno.duracion.toMinutes()}</td>
-            <td>${turno.precioBase}</td>
+            <td>
+                <g:if test="${turno.getPrecioFinal() != turno.precioBase}">
+                    ${turno.getPrecioFinal()} <del>${turno.precioBase}</del>
+                </g:if>
+                <g:else>
+                    ${turno.precioBase}
+                </g:else>
+            </td>
             <g:if test="${turno.reserva != null}">
             <td>Reservado: <g:link controller="reserva" action="show" params="[id:turno.reserva.id]">${turno.reserva}</g:link></td>
             </g:if>

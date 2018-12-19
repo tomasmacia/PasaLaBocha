@@ -1,10 +1,12 @@
 package pasalabocha
 
+import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 
-@Transactional
+//@Service(Descuento)
 class DescuentoService {
 
+    @Transactional
     Map<String, List<Descuento>> descuentosPorTipo(Club club) {
         Map<String, List<Descuento>> descuentos = new HashMap<>()
 
@@ -21,5 +23,11 @@ class DescuentoService {
         }))
 
         return descuentos
+    }
+
+    @Transactional
+    def aplicar(Turno turno, Descuento descuento){
+        turno.descuento = descuento
+        turno.save(failOnError: true)
     }
 }
