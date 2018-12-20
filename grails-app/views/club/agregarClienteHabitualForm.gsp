@@ -6,7 +6,7 @@
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
-      <g:form controller="club" method="POST" params="[id:id]">
+      <g:form controller="club" method="POST">
         <input list="clientes" name="username">
         <datalist id="clientes">
           <g:each in="${clienteList}" var="cliente">

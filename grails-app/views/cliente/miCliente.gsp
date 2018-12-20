@@ -25,7 +25,13 @@
             <label>Email: <f:display bean="cliente" property="email"/></label><br>
             <label>Nivel de confiabilidad: </label><br>
             <f:display bean="cliente" property="confiabilidad"/><br>
+            <g:link controller="cliente" action="misReservas">Ver mis reservas</g:link><br>
             </div>
+            <g:form resource="${this.cliente}" method="DELETE">
+                <fieldset class="buttons">
+                    <g:link class="edit" action="edit" resource="${this.cliente}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                </fieldset>
+            </g:form>
         </div>
     </body>
 </html>

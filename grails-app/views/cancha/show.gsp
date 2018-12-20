@@ -19,8 +19,12 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="cancha" />
-            <g:link action="verTurnos" id="${this.cancha.id}">Ver turnos</g:link>
+            <label>Numero de cancha: <f:display bean="cancha" property="numeroDeCancha"/></label><br/>
+            <label>Tipo de suelo: <f:display bean="cancha" property="tipoSuelo"/></label><br/>
+            <label>Cantidad de jugadores: <f:display bean="cancha" property="cantidadJugadores"/></label><br/>
+            <label>Dimensiones: </label><br/><f:display bean="cancha" property="dimensiones"/><br/>
+            <label>Tiene iluminación: <f:display bean="cancha" property="poseeIluminacion"/></label><br/>
+            <g:link action="verMisTurnos" params="[canchaId:this.cancha.id]">Ver turnos</g:link>
             <g:form resource="${this.cancha}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.cancha}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

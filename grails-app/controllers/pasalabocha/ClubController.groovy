@@ -17,6 +17,7 @@ class ClubController {
         respond clubService.list(params), model:[clubCount: clubService.count()]
     }
 
+    @Secured(['ROLE_CLIENTE'])
     def show(Long id) {
         respond clubService.get(id)
     }
@@ -30,28 +31,31 @@ class ClubController {
         respond (club.canchas)
     }
 
-    def verClientesHabituales(Long id){
-      Club club = clubService.get(id)
-      println(club.clientesHabituales)
-      respond club.clientesHabituales, model:[id: id]
+    @Secured(['ROLE_CLUB'])
+    def verClientesHabituales(){
+        Club club = authenticatedUser
+        respond club.clientesHabituales
     }
 
-    def agregarClienteHabitualForm(Long id){
-      respond Cliente.list(), model:[id:id]
+    @Secured(['ROLE_CLUB'])
+    def agregarClienteHabitualForm(){
+        respond Cliente.list()
     }
 
-    def agregarClienteHabitual(Long id, String username){
-      Cliente cliente = Cliente.findByUsername(username)
-      clubService.agregarClienteHabitual(id, cliente)
-      redirect(action:"verClientesHabituales", params: [id: id])
+    @Secured(['ROLE_CLUB'])
+    def agregarClienteHabitual(String username){
+        Club club = authenticatedUser
+        Cliente cliente = Cliente.findByUsername(username)
+        clubService.agregarClienteHabitual(club, cliente)
+        redirect action:"verClientesHabituales"
     }
 
-    def eliminarClienteHabitual(Long id, String username){
-      println(username)
-      println(id)
-      Cliente cliente = Cliente.findByUsername(username)
-      clubService.eliminarClienteHabitual(id, cliente)
-      redirect(action:"verClientesHabituales", params: [id: id])
+    @Secured(['ROLE_CLUB'])
+    def eliminarClienteHabitual(String username){
+        Club club = authenticatedUser
+        Cliente cliente = Cliente.findByUsername(username)
+        clubService.eliminarClienteHabitual(club, cliente)
+        redirect action:"verClientesHabituales"
     }
 
     @Secured(['ROLE_CLUB'])

@@ -17,14 +17,12 @@ abstract class ClubService {
     protected abstract Club save(Club club)
 
     @Transactional
-    def agregarClienteHabitual(Long id, Cliente cliente){
-      Club club = get(id)
+    def agregarClienteHabitual(Club club, Cliente cliente){
       club.addToClientesHabituales(cliente)
     }
 
     @Transactional
-    def eliminarClienteHabitual(Long id, Cliente cliente){
-      Club club = get(id)
+    def eliminarClienteHabitual(Club club, Cliente cliente){
       club.removeFromClientesHabituales(cliente)
     }
 

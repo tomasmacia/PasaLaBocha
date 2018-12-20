@@ -27,8 +27,8 @@ class ClienteController {
 
     @Secured(['ROLE_CLIENTE'])
     def miCliente(){
-      Cliente cliente = authenticatedUser
-      redirect(action:"show", params: [id: cliente.id])
+        Cliente cliente = authenticatedUser
+        respond cliente
     }
 
     @Secured(['ROLE_CLIENTE'])

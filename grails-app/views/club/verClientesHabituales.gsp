@@ -22,7 +22,7 @@
             <td>${clienteHabitual.apellido}</td>
             <td>${clienteHabitual.email}</td>
             <td>${clienteHabitual.apodo}</td>
-            <td><g:link action="eliminarClienteHabitual" id="${id}" params="[username:clienteHabitual.username]">Eliminar</g:link></td>
+            <td><g:link action="eliminarClienteHabitual" params="[username:clienteHabitual.username]">Eliminar</g:link></td>
           </tr>
         </g:each>
       </table>

@@ -18,11 +18,13 @@ class CanchaController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", generarTurnos: "POST"]
 
+    @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond canchaService.list(params), model:[canchaCount: canchaService.count()]
     }
 
+    @Secured(['ROLE_CLUB'])
     def show(Long id) {
         respond canchaService.get(id)
     }
@@ -74,6 +76,7 @@ class CanchaController {
       respond cancha.turnos
     }
 
+    @Secured(['ROLE_CLIENTE'])
     def reservarTurno(){
         System.out.println(params.turnoId)
 
@@ -89,6 +92,7 @@ class CanchaController {
       redirect(controller:"turno", action:"index")
     }
 
+    @Secured(['ROLE_CLUB'])
     private eliminarTurno(Long canchaId, Long turnoId){
       Turno turno = Turno.get(turnoId)
       canchaService.eliminarTurno(canchaId, turno)
