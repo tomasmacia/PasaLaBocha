@@ -11,7 +11,7 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" controller="descuento" action="listar"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="list" controller="descuento" action="listar">Descuentos activos</g:link></li>
             </ul>
         </div>
         <div id="create-descuentoEnRango" class="content scaffold-create" role="main">
@@ -29,11 +29,11 @@
             <g:set var="now" value="${LocalDateTime.now().withSecond(0).withNano(0)}" />
             <g:form action="aplicarYGuardar" name="createForm" method="POST">
                 <fieldset class="form">
-                    <label>Porcentaje de descuento: <input type="number" name="porcentaje" required></label><br>
-                    <label>Nivel de confiabilidad necesario: <input type="number" name="nivelConfiabilidadNecesario" required></label><br>
+                    <label>Porcentaje de descuento: <input type="number" name="porcentaje" min="1" max="100" required></label><br>
+                    <label>Nivel de confiabilidad necesario: <input type="number" name="nivelConfiabilidadNecesario" min="0" required></label><br>
                     <label>Fecha inicial: <input type="datetime-local" name="fechaInicial" min="${now.toString()}"
                                            max="${now.plusWeeks(3).toString()}" required></label><br>
-                    <label>Fecha final: <input type="datetime-local" name="fechaFinal" min="${fechaInicial.toString()}"
+                    <label>Fecha final: <input type="datetime-local" name="fechaFinal" min="${now.toString()}"
                                            max="${now.plusWeeks(3).toString()}" required></label><br>
                 </fieldset>
                 <fieldset class="buttons">

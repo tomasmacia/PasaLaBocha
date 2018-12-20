@@ -10,7 +10,7 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" controller="descuento" action="listar"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="list" controller="descuento" action="listar">Descuentos activos</g:link></li>
             </ul>
         </div>
         <div id="create-descuentoPorTurnoAnterior" class="content scaffold-create" role="main">
@@ -27,8 +27,8 @@
             </g:hasErrors>
             <g:form action="guardar" name="createForm" method="POST">
                 <fieldset class="form">
-                    <label>Porcentaje de descuento: <input type="number" min="0" max="100" name="porcentaje" required></label><br>
-                    <label>Nivel de confiabilidad necesario: <input type="number" min="1" step="1" name="nivelConfiabilidadNecesario" required></label><br>
+                    <label>Porcentaje de descuento: <input type="number" min="1" max="100" name="porcentaje" required></label><br>
+                    <label>Nivel de confiabilidad necesario: <input type="number" min="0" step="1" name="nivelConfiabilidadNecesario" required></label><br>
                     <label>Aplicar descuento si no pasaron más de: <input type="number" min="1" step="1" name="horasRestantes" required/></label>horas desde el turno anterior<br>
                 </fieldset>
                 <fieldset class="buttons">

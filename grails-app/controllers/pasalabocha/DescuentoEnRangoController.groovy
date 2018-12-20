@@ -98,7 +98,7 @@ class DescuentoEnRangoController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'descuentoEnRango.label', default: 'DescuentoEnRango'), id])
-                redirect action:"index", method:"GET"
+                redirect controller:"descuento", action:"listar", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }

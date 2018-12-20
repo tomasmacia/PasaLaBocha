@@ -96,7 +96,7 @@ class DescuentoPorTurnoAnteriorController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'descuentoPorTurnoAnterior.label', default: 'DescuentoPorTurnoAnterior'), id])
-                redirect action:"index", method:"GET"
+                redirect controller:"descuento", action:"listar", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }

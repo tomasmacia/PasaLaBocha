@@ -1,3 +1,4 @@
+<%@ page import="java.time.Duration" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,8 +11,8 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="list" controller="descuento" action="listar">Descuentos activos</g:link></li>
+                <li><g:link class="create" action="create">Nuevo descuento por horas restantes</g:link></li>
             </ul>
         </div>
         <div id="edit-descuentoPorHorasRestantes" class="content scaffold-edit" role="main">
@@ -29,7 +30,9 @@
             <g:form resource="${this.descuentoPorHorasRestantes}" method="PUT">
                 <g:hiddenField name="version" value="${this.descuentoPorHorasRestantes?.version}" />
                 <fieldset class="form">
-                    <f:all bean="descuentoPorHorasRestantes"/>
+                    <f:field bean="descuentoPorHorasRestantes" property="porcentaje"/>
+                    <f:field bean="descuentoPorHorasRestantes" property="nivelConfiabilidadNecesario"/>
+                    <label>Aplica descuento cuando faltan: ${this.descuentoPorHorasRestantes.horasRestantes.toHours()} horas</label><br>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

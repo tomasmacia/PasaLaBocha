@@ -10,7 +10,7 @@
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="list" controller="descuento" action="listar">Descuentos activos</g:link></li>
                 <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
@@ -29,7 +29,10 @@
             <g:form resource="${this.descuentoEnRango}" method="PUT">
                 <g:hiddenField name="version" value="${this.descuentoEnRango?.version}" />
                 <fieldset class="form">
-                    <f:all bean="descuentoEnRango"/>
+                    <f:field bean="descuentoEnRango" property="porcentaje"/>
+                    <f:field bean="descuentoEnRango" property="nivelConfiabilidadNecesario"/>
+                    <label>Fecha inicial: <f:display bean="descuentoEnRango" property="fechaInicial"/></label><br>
+                    <label>Fecha final: <f:display bean="descuentoEnRango" property="fechaFinal"/></label><br>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
