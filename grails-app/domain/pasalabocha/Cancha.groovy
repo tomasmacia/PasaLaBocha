@@ -10,7 +10,8 @@ class Cancha {
     Integer numeroDeCancha
     boolean poseeIluminacion
     Integer cantidadJugadores
-    List<Turno> turnos // set treeset
+    //Hashtable<LocalDateTime, Turno> turnos
+    Set<Turno> turnos
     // boolean aptoEspectador
 
     static embedded = ['dimensiones']
@@ -23,12 +24,31 @@ class Cancha {
       numeroDeCancha nullable: false
     }
 
-    static mapping = {
-      //version false
-      //id column: 'numeroDeCancha'
-    }
-
     String toString(){
       "Cancha ${numeroDeCancha}"
+    }
+
+    def agregarTurno(Turno turno, LocalDateTime ahora) {
+        if (turno.esAntesDe(ahora)){
+            throw new Exception("El turno que intentas agregar ya pasó")
+        }
+        if (turnos){
+            def superpuestos = turnos.findAll {it.seSuperpone(turno)}
+            if (superpuestos){
+                throw new Exception("El turno que intentas agregar se superpone con otro")
+            }
+        }
+        this.addToTurnos(turno)
+    }
+
+    def eliminarTurno(Turno turno){
+        if (turno.cancha != this){
+            throw new Exception("El turno que intenta eliminar no pertenece a esta cancha")
+        }
+        if (!(turno.estaReservado())){
+            this.removeFromTurnos(turno)
+        } else {
+            throw new Exception("El turno que intenta eliminar ya se encuentra reservado")
+        }
     }
 }
