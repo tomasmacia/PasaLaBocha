@@ -45,6 +45,24 @@ class Turno {
     }
 
     boolean estaVencido(LocalDateTime ahora){
-        (this.reserva == null && ahora.isAfter(this.fechaHorario))
+        (this.reserva == null && ahora.isAfter(this.fechaHorario + this.duracion))
+    }
+
+    boolean seSuperpone(Turno other){
+        if (this.fechaHorario > other.fechaHorario){
+            return (other.fechaHorario + other.duracion > this.fechaHorario)
+        } else if (other.fechaHorario > this.fechaHorario){
+            return (this.fechaHorario + this.duracion > other.fechaHorario)
+        } else {
+            return true
+        }
+    }
+
+    boolean esAntesDe(LocalDateTime fechaHorario){
+        this.fechaHorario < fechaHorario
+    }
+
+    boolean estaReservado(){
+        this.reserva != null
     }
 }

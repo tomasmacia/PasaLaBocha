@@ -33,6 +33,7 @@ abstract class CanchaService {
 
     @Transactional
     void generarTurnos(Long id, List<LocalDateTime> fechas, Duration duracion, Long precio) {
+        // MODIFICAR PARA USAR AGREGARTURNO DE CANCHA
         Cancha cancha = get(id)
         fechas.each{ fecha ->
             new Turno([
