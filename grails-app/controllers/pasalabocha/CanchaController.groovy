@@ -81,7 +81,7 @@ class CanchaController {
         System.out.println(params.turnoId)
 
         Turno turno = turnoService.get(params.turnoId)
-        turno.reservar(authenticatedUser)
+        turno.reservar(authenticatedUser) // service transaccion
         redirect(action:"verTurnos", params: [id: turno.cancha.id])
     }
 
@@ -94,7 +94,7 @@ class CanchaController {
 
     @Secured(['ROLE_CLUB'])
     private eliminarTurno(Long canchaId, Long turnoId){
-      Turno turno = Turno.get(turnoId)
+      Turno turno = Turno.get(turnoId) //
       canchaService.eliminarTurno(canchaId, turno)
       redirect(controller:"club", action:"misReservas")
     }

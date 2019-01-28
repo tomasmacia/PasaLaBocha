@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory
 
 @Integration
 @Rollback
-class ClubServiceSpec extends Specification {
+class ClubServiceIntegrationSpec extends Specification {
 
     ClubService clubService
     SessionFactory sessionFactory

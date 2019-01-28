@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 class Turno {
     LocalDateTime fechaHorario
     Duration duracion
-    BigDecimal precioBase
+    BigDecimal precioBase // clase Dinero
     Descuento descuento
 
     static hasOne = [reserva: Reserva]
@@ -31,7 +31,7 @@ class Turno {
       BigDecimal precioFinal = this.getPrecioFinal()
 
       reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion).save(failOnError: true)
-      this.save(failOnError: true)
+      this.save(failOnError: true) // sin saves
     }
 
     BigDecimal getPrecioFinal() {

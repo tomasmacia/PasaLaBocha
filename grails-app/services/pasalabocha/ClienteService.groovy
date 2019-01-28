@@ -17,7 +17,7 @@ abstract class ClienteService {
     protected abstract Cliente save(Cliente cliente)
 
     @Transactional
-    void aumentarConfiabilidad(Long id) {
+    void aumentarConfiabilidad(Long id) { //deberia ser todo un service que confirme la asistencia
         Cliente cliente = get(id)
         cliente.confiabilidad = cliente.confiabilidad.aumentar()
         cliente.save(failOnError: true, flush: true)

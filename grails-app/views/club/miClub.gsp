@@ -4,8 +4,16 @@
         <meta name="layout" content="pasalabocha" />
         <g:set var="entityName" value="${message(code: 'club.label', default: 'Club')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <style>
+            .sarasa{
+                background-color: #dddddd;
+                height: 30vh;
+            }
+        </style>
     </head>
     <body>
+    <div class="sarasa">
+    </div>
         <a href="#show-club" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav" role="navigation">
             <ul>

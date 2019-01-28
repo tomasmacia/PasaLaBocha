@@ -18,7 +18,7 @@ abstract class SenaService {
 
     @Transactional
     void pagar(Sena sena){
-      sena.pagada = true
+      sena.pagada = true // entidad pagar
       save(sena)
     }
 

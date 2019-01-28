@@ -22,7 +22,7 @@ class Sena {
     }
 
     boolean estaVencida(){
-        this.pagada == false && this.plazoLimitePago.isBefore(LocalDateTime.now())
+        !this.pagada && this.plazoLimitePago.isBefore(LocalDateTime.now())
     }
 
     String toString(){

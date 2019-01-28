@@ -13,9 +13,13 @@
 
 
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-amber.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    %{--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">--}%
+    %{--<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-amber.min.css">--}%
+    %{--<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>--}%
+
+    %{--local assets--}%
+    <asset:stylesheet src="material.teal-amber.min.css"/>
+    <asset:javascript src="material.min.js" />
     <asset:stylesheet src="application.css"/>
 
 
@@ -27,10 +31,12 @@
 
     <div class="mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row">
+            <a class="mdl-navigation__link" href="/#">
             <span class="mdl-layout-title">
                 <asset:image src="pasalabocha.png" alt="PasaLaBocha" style="width:56px; height:56px;"/>
                 PasaLaBocha
             </span>
+            </a>
             <!-- Add spacer, to align navigation to the right in desktop -->
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">

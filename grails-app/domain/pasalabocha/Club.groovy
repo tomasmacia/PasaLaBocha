@@ -12,8 +12,8 @@ class Club extends User{
     // lo dejo pero recordar que dijeron que no era necesario incluir esta historia de usuario
     Duration tiempoLimiteCancelacionReserva
     Duration tiempoLimitePagoDeSena
-    List<Cancha> canchas
-    Set<Cliente> clientesHabituales
+    List<Cancha> canchas // Set
+    Set<Cliente> clientesHabituales // intermediario
     Set<Descuento> descuentos
 
     static hasMany = [canchas: Cancha, clientesHabituales: Cliente, reservas: Reserva, descuentos: Descuento]

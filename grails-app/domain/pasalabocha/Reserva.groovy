@@ -12,7 +12,8 @@ class Reserva {
     Integer nroReserva
     Turno turno
     //intente hacer un one-to-many unidirecional pero el addToReservas no actualizaba la join table
-    Club club
+    Club club // eliminar
+
 
     static hasOne = [sena: Sena]
 
@@ -40,6 +41,13 @@ class Reserva {
     }
 
     String toString(){
+//        Reserva.withCriteria {
+//            turno {
+//                cancha {
+//                    eq("club", club)
+//                }
+//            }
+//        }
      "${turno} por ${cliente}"
     }
 }

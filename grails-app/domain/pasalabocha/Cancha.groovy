@@ -10,8 +10,7 @@ class Cancha {
     Integer numeroDeCancha
     boolean poseeIluminacion
     Integer cantidadJugadores
-    //Hashtable<LocalDateTime, Turno> turnos
-    List<Turno> turnos
+    List<Turno> turnos // set treeset
     // boolean aptoEspectador
 
     static embedded = ['dimensiones']

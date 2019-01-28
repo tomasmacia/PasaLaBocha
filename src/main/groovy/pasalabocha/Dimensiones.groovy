@@ -1,6 +1,6 @@
 package pasalabocha
 
-class Dimensiones {
-    String ancho
+class Dimensiones { //singular
+    String ancho // magnitudes
     String largo
 }

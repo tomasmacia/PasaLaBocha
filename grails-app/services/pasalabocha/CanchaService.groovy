@@ -54,7 +54,7 @@ abstract class CanchaService {
 
     @Transactional
     void eliminarVencidos(List<Turno> turnos){
-        def ahora = LocalDateTime.now()
+        def ahora = LocalDateTime.now() // parametro y separar logica
         turnos.each {turno -> if (turno.estaVencido(ahora)){
                                 eliminarTurno(turno.cancha.id, turno)
                               }}
