@@ -63,7 +63,7 @@ class BootStrap {
         boca.agregarCancha(canchaUnoBoca)
         canchaUnoBoca.save(failOnError: true)
 
-        /*LocalDateTime ahora = LocalDateTime.now()
+        LocalDateTime ahora = LocalDateTime.now()
         Duration unaHora = Duration.ofHours(1);
         LocalDateTime mañanaALas10hs = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(10, 0))
         LocalDateTime mañanaALas12hs = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(12, 0))
@@ -84,7 +84,7 @@ class BootStrap {
               duracion: unaHora,
               precioBase: 400)
         canchaUnoBoca.agregarTurno(turno3, ahora)
-        turno3.save(failOnError: true)*/
+        turno3.save(failOnError: true)
 
         // initializing login data
         def adminRole = new Role(authority: 'ROLE_ADMIN').save(failOnError: true)

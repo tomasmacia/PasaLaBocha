@@ -4,6 +4,7 @@ import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Secured(['permitAll'])
 class TurnoController {
@@ -20,6 +21,13 @@ class TurnoController {
 
     def show(Long id) {
         respond turnoService.get(id)
+    }
+
+    @Secured(['ROLE_CLIENTE'])
+    def reservar(){
+        Turno turno = turnoService.get(params.turnoId)
+        turnoService.reservar(turno, authenticatedUser)
+        redirect(controller:"cancha", action:"verTurnos", params: [id: turno.cancha.id])
     }
 
     @Secured(['ROLE_CLUB'])

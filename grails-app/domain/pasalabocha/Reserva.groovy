@@ -30,19 +30,12 @@ class Reserva {
         Club club = turno.cancha.club
         if (!club.esConfiable(cliente)){
             Duration tiempoLimitePagoDeSena = club.tiempoLimitePagoDeSena
-            this.sena = new Sena(tiempoLimitePagoDeSena, precio, club.porcentajeSena, ahora)
-            //this.sena.save(failOnError: true)
+            this.sena = new Sena(this, tiempoLimitePagoDeSena, precio, club.porcentajeSena, ahora)
+            this.sena.save(failOnError: true)
         }
     }
 
     String toString(){
-//        Reserva.withCriteria {
-//            turno {
-//                cancha {
-//                    eq("club", club)
-//                }
-//            }
-//        }
      "${turno} por ${cliente}"
     }
 }

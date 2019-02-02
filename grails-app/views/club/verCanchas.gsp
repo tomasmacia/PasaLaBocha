@@ -15,7 +15,7 @@
             <td>Iluminación</td>
             <td>Ver turnos</td>
          </tr>
-        <g:each in="${canchaList}" var="cancha">
+        <g:each in="${canchaSet}" var="cancha">
           <tr>
             <td>${cancha}</td>
             <td>Ancho: ${cancha.dimensiones.ancho}, Largo: ${cancha.dimensiones.largo}</td>

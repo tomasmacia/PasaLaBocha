@@ -1,18 +1,25 @@
 package pasalabocha
 
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
+
+import java.time.LocalDateTime;
 
 @Service(Turno)
-interface TurnoService {
+abstract class TurnoService {
 
-    Turno get(Serializable id)
+    protected abstract Turno get(Serializable id)
 
-    List<Turno> list(Map args)
+    protected abstract List<Turno> list(Map args)
 
-    Long count()
+    protected abstract Long count()
 
-    void delete(Serializable id)
+    protected abstract void delete(Serializable id)
 
-    Turno save(Turno turno)
+    protected abstract Turno save(Turno turno)
 
+    @Transactional
+    void reservar(Turno turno, Cliente cliente){
+        turno.reservar(cliente, LocalDateTime.now())
+    }
 }

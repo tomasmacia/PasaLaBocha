@@ -14,7 +14,6 @@ class CanchaController {
 
     CanchaService canchaService
     ClienteService clienteService
-    TurnoService turnoService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", generarTurnos: "POST"]
 
@@ -32,8 +31,9 @@ class CanchaController {
     @Secured(['ROLE_CLUB'])
     def create() {
         Club club = authenticatedUser
-        params.club = club
-        respond new Cancha(params)
+        Cancha cancha = new Cancha(params)
+        club.agregarCancha(cancha)
+        respond cancha
     }
 
     @Secured(['ROLE_CLUB'])
@@ -51,13 +51,6 @@ class CanchaController {
 
     }
 
-//    def generarTurno(){
-//        LocalDateTime fechaHorario = LocalDateTime.parse(params.horario.toString())
-//        Duration duracion = Duration.ofMinutes(Long.valueOf(params.duracion.toString()))
-//        canchaService.generarTurno(Long.valueOf(params.id.toString()), fechaHorario, duracion, Long.valueOf(params.precio.toString()))
-//
-//      redirect(action: "show", params: [id: params.id])
-//    }
     @Secured(['ROLE_CLUB'])
     def generarTurnos() {
         List<LocalDateTime> fechas = params.findAll{ param ->
@@ -70,33 +63,18 @@ class CanchaController {
         redirect(action: "show", params: [id: params.id])
     }
 
+    @Secured(['ROLE_CLUB'])
+    private eliminarTurno(Long canchaId, Long turnoId){
+      Turno turno = Turno.get(turnoId)
+      Cancha cancha = Cancha.get(canchaId)
+      cancha.eliminarTurno(turno)
+      redirect(controller:"club", action:"misReservas")
+    }
+
     @Secured(['ROLE_CLIENTE'])
     def verTurnos(Long id){
       Cancha cancha = canchaService.get(id)
       respond cancha.turnos
-    }
-
-    @Secured(['ROLE_CLIENTE'])
-    def reservarTurno(){
-        System.out.println(params.turnoId)
-
-        Turno turno = turnoService.get(params.turnoId)
-        turno.reservar(authenticatedUser) // service transaccion
-        redirect(action:"verTurnos", params: [id: turno.cancha.id])
-    }
-
-    @Secured(['ROLE_ADMIN'])
-    def eliminarTurnosVencidos(){
-      List<Turno> turnos = Turno.list()
-      canchaService.eliminarVencidos(turnos)
-      redirect(controller:"turno", action:"index")
-    }
-
-    @Secured(['ROLE_CLUB'])
-    private eliminarTurno(Long canchaId, Long turnoId){
-      Turno turno = Turno.get(turnoId) //
-      canchaService.eliminarTurno(canchaId, turno)
-      redirect(controller:"club", action:"misReservas")
     }
 
     @Secured(['ROLE_CLUB'])
@@ -110,6 +88,13 @@ class CanchaController {
         clienteService.disminuirConfiabilidad(clienteId)
         eliminarTurno(canchaId, turnoId)
     }
+
+    @Secured(['ROLE_ADMIN'])
+    def eliminarTurnosVencidos(){
+      List<Turno> turnos = Turno.list()
+      canchaService.eliminarVencidos(turnos)
+      redirect(controller:"turno", action:"index")
+  }
 
     @Secured(['ROLE_CLUB'])
     def save(Cancha cancha) {

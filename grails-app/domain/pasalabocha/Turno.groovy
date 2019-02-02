@@ -32,7 +32,7 @@ class Turno {
         Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
         BigDecimal precioFinal = this.calcularPrecioFinal()
 
-        this.reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion, ahora)//.save(failOnError: true)
+        this.reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion, ahora).save(failOnError: true)
     }
 
     BigDecimal calcularPrecioFinal(){

@@ -14,13 +14,13 @@
           <th>Precio</th>
           <th>Reserva</th>
         </tr>
-        <g:each in="${turnoList}" var="turno">
+        <g:each in="${turnoSet}" var="turno">
           <tr>
             <td>${turno.fechaHorario.toLocalDate()}</td>
             <td>${turno.fechaHorario.toLocalTime()}</td>
             <td>${turno.duracion.toMinutes()}</td>
             <td>
-                <g:if test="${turno.getPrecioFinal() != turno.precioBase}">
+                <g:if test="${turno.calcularPrecioFinal() != turno.precioBase}">
                     ${turno.getPrecioFinal()} <del>${turno.precioBase}</del>
                 </g:if>
                 <g:else>
@@ -31,7 +31,7 @@
             <td>Reservado</td>
             </g:if>
             <g:else>
-            <td>Disponible: <g:link action="reservarTurno" params="[turnoId:turno.id]">Reservar</g:link></td>
+            <td>Disponible: <g:link controller="turno" action="reservar" params="[turnoId:turno.id]">Reservar</g:link></td>
             </g:else>
           </tr>
         </g:each>
