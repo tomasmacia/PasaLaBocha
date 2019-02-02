@@ -33,6 +33,7 @@ class ClubSpec extends Specification implements DomainUnitTest<Club> {
 
         then:"La cancha pertenece al club"
         cancha in club.canchas
+        cancha.club == club
     }
 
     void "Agregar dos canchas con distinto numero de cancha"(){

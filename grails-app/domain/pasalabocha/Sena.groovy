@@ -15,14 +15,23 @@ class Sena {
       nroSena nullable: true
     }
 
-    public Sena(Reserva reserva, Duration tiempoLimitePagoDeSena, BigDecimal monto){
-      this.reserva = reserva
-      this.plazoLimitePago = LocalDateTime.now() + tiempoLimitePagoDeSena
-      this.monto = monto
+    public Sena(Duration tiempoLimitePagoDeSena, BigDecimal precioReserva, Integer porcentajeSena, LocalDateTime ahora){
+      this.plazoLimitePago = ahora + tiempoLimitePagoDeSena
+      this.monto = precioReserva * (porcentajeSena / 100)
     }
 
-    boolean estaVencida(){
-        !this.pagada && this.plazoLimitePago.isBefore(LocalDateTime.now())
+    boolean estaVencida(LocalDateTime ahora){
+        !this.pagada && this.plazoLimitePago.isBefore(ahora)
+    }
+
+    def pagar(LocalDateTime ahora){
+        if (this.estaVencida(ahora)){
+            throw new Exception("La reserva ya se encuentra vencida")
+        } else if (this.pagada){
+            throw new Exception("La reserva ya se encuentra pagada")
+        } else {
+            this.pagada = true
+        }
     }
 
     String toString(){

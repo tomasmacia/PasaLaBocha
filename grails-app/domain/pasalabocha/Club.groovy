@@ -25,6 +25,7 @@ class Club extends User{
         // esto es porque en la vista aun no se pueden captar estos dos
         tiempoLimiteCancelacionReserva nullable: true
         tiempoLimitePagoDeSena nullable: true
+        porcentajeSena min:0, max:100
     }
 
     static mapping = {
@@ -60,5 +61,17 @@ class Club extends User{
             }
         }
         this.removeFromClientesHabituales(cliente)
+    }
+
+    boolean esConfiable(Cliente cliente){
+        this.esHabitual(cliente) || cliente.safisfaceNivelDeConfiabilidad(this.nivelConfiabilidadNecesario)
+    }
+
+    boolean esHabitual(Cliente cliente){
+        if (clientesHabituales){
+            return clientesHabituales.contains(cliente)
+        } else {
+            return false
+        }
     }
 }

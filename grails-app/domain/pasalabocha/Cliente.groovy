@@ -21,7 +21,7 @@ class Cliente extends User{
       apodo nullable: true, blank: true
     }
 
-    boolean esConfiable(int nivelNecesario) {
+    boolean safisfaceNivelDeConfiabilidad(int nivelNecesario) {
         return confiabilidad.satisface(nivelNecesario)
     }
 

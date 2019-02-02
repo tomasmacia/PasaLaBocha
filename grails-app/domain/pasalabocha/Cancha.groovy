@@ -10,7 +10,6 @@ class Cancha {
     Integer numeroDeCancha
     boolean poseeIluminacion
     Integer cantidadJugadores
-    //Hashtable<LocalDateTime, Turno> turnos
     Set<Turno> turnos
     // boolean aptoEspectador
 

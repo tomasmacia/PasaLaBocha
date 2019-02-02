@@ -14,34 +14,33 @@ class Turno {
     static belongsTo = [cancha: Cancha]
 
     static constraints = {
-      reserva nullable: true
-      descuento nullable: true
+        reserva nullable: true
+        descuento nullable: true
     }
 
     String toString(){
-      "${cancha}: ${fechaHorario}, ${duracion.toMinutes()} minutos"
+        "${cancha}: ${fechaHorario}, ${duracion.toMinutes()} minutos"
     }
 
-    def reservar(Cliente cliente){
-      //modificar precioBase cuando esten los descuentos
-      Duration tiempoLimiteCancelacionReserva = this.cancha.club.tiempoLimiteCancelacionReserva
-      LocalDateTime plazoLimiteCancelacion = fechaHorario
-      plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
-      Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
-      BigDecimal precioFinal = this.getPrecioFinal()
-
-      reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion).save(failOnError: true)
-      this.save(failOnError: true) // sin saves
-    }
-
-    BigDecimal getPrecioFinal() {
-        BigDecimal precioFinal = this.precioBase
-
-        if (this.descuento && this.descuento.porcentaje) {
-            precioFinal = precioFinal * (1 - this.descuento.porcentaje / 100)
+    def reservar(Cliente cliente, LocalDateTime ahora){
+        if (this.reserva){
+            throw new Exception("El turno seleccionado ya se encuentra reservado")
         }
+        Duration tiempoLimiteCancelacionReserva = this.cancha.club.tiempoLimiteCancelacionReserva
+        LocalDateTime plazoLimiteCancelacion = fechaHorario
+        plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
+        Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
+        BigDecimal precioFinal = this.calcularPrecioFinal()
 
-        precioFinal
+        this.reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion, ahora)//.save(failOnError: true)
+    }
+
+    BigDecimal calcularPrecioFinal(){
+        if (this.descuento){
+            return this.descuento.aplicarA(this.precioBase)
+        } else {
+            return this.precioBase
+        }
     }
 
     boolean estaVencido(LocalDateTime ahora){

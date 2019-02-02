@@ -7,7 +7,7 @@
     </head>
     <body>
       <table style="width:100%">
-        <g:each in="${canchaList}" var="cancha">
+        <g:each in="${canchaSet}" var="cancha">
           <tr>
             <td><g:link controller="cancha" action="show" params="[id:cancha.id]">${cancha}</g:link></td>
             <td><g:link controller="cancha" action="verMisTurnos" params="[canchaId:cancha.id]">Ver turnos</g:link></td>
