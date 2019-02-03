@@ -41,7 +41,7 @@ class Reserva {
     }
 
     boolean estaCumplida(){
-        this.asistenciaCumplida
+        this.asistencia == Asistencia.ASISTIO
     }
 
     String toString(){

@@ -87,7 +87,6 @@ class CanchaController {
             notFound()
             return
         }
-        println(cancha.club)
         Club club = authenticatedUser
         club.agregarCancha(cancha)
         try {

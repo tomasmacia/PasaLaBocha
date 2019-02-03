@@ -28,9 +28,7 @@ class SenaController {
 
     @Secured(['ROLE_CLUB'])
     def pagar(Long id){
-        println(id)
         Sena sena = Sena.get(id)
-        println(sena)
         senaService.pagar(sena)
         redirect(controller: "club", action:"misSenas")
     }
