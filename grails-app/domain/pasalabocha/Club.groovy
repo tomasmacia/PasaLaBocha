@@ -45,24 +45,6 @@ class Club extends User{
         this.addToCanchas(cancha)
     }
 
-    def agregarClienteHabitual(Cliente cliente){
-        if (clientesHabituales){
-            if (cliente in clientesHabituales){
-                throw new Exception()
-            }
-        }
-        this.addToClientesHabituales(cliente)
-    }
-
-    def eliminarClienteHabitual(Cliente cliente){
-        if (clientesHabituales){
-            if (!(cliente in clientesHabituales)){
-                throw new Exception()
-            }
-        }
-        this.removeFromClientesHabituales(cliente)
-    }
-
     boolean esConfiable(Cliente cliente){
         this.esHabitual(cliente) || cliente.safisfaceNivelDeConfiabilidad(this.nivelConfiabilidadNecesario)
     }

@@ -5,7 +5,7 @@ import java.time.Duration
 
 class Sena {
     BigDecimal monto
-    boolean pagada = false
+    boolean pagada
     LocalDateTime plazoLimitePago
     Integer nroSena // diferente al id de Sena
 
@@ -17,6 +17,7 @@ class Sena {
 
     public Sena(Reserva reserva, Duration tiempoLimitePagoDeSena, BigDecimal precioReserva, Integer porcentajeSena, LocalDateTime ahora){
         this.reserva = reserva
+        this.pagada = false
         this.plazoLimitePago = ahora + tiempoLimitePagoDeSena
         this.monto = precioReserva * (porcentajeSena / 100)
     }
@@ -25,14 +26,8 @@ class Sena {
         !this.pagada && this.plazoLimitePago.isBefore(ahora)
     }
 
-    def pagar(LocalDateTime ahora){
-        if (this.estaVencida(ahora)){
-            throw new Exception("La reserva ya se encuentra vencida")
-        } else if (this.pagada){
-            throw new Exception("La reserva ya se encuentra pagada")
-        } else {
-            this.pagada = true
-        }
+    boolean estaPaga(){
+        this.pagada
     }
 
     String toString(){

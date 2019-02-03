@@ -9,6 +9,7 @@ class Reserva {
     LocalDateTime plazoLimiteCancelacion
     Integer nroReserva
     Turno turno
+    Asistencia asistencia = Asistencia.INDETERMINADA
 
     static hasOne = [sena: Sena]
 
@@ -33,6 +34,14 @@ class Reserva {
             this.sena = new Sena(this, tiempoLimitePagoDeSena, precio, club.porcentajeSena, ahora)
             this.sena.save(failOnError: true)
         }
+    }
+
+    boolean tieneSenaPaga(){
+        this.sena && this.sena.estaPaga()
+    }
+
+    boolean estaCumplida(){
+        this.asistenciaCumplida
     }
 
     String toString(){

@@ -1,6 +1,5 @@
 package pasalabocha
 
-import java.util.Hashtable
 import java.time.LocalDateTime
 
 class Cancha {
@@ -47,7 +46,7 @@ class Cancha {
         if (!(turno.estaReservado())){
             this.removeFromTurnos(turno)
         } else {
-            throw new Exception("El turno que intenta eliminar ya se encuentra reservado")
+           throw new Exception("El turno que intenta eliminar ya se encuentra reservado")
         }
     }
 }

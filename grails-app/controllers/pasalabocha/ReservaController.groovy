@@ -26,10 +26,16 @@ class ReservaController {
     }
 
     @Secured(['ROLE_CLUB'])
-    def pagarSena(Long reservaId){
-      Reserva reserva = reservaService.get(reservaId)
-      senaService.pagar(reserva.sena)
-      redirect(controller: "club", action:"misReservas")
+    def asistenciaCumplida(Long id) {
+        Reserva reserva = Reserva.get(id)
+        reservaService.asistenciaCumplida(reserva)
+        redirect(controller:"club", action:"misReservas")
+    }
+
+    @Secured(['ROLE_CLUB'])
+    def asistenciaIncumplida(Long id) {
+        reservaService.asistenciaIncumplida(id)
+        redirect(controller:"club", action:"misReservas")
     }
 
     def save(Reserva reserva) {

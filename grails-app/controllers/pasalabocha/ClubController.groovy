@@ -46,7 +46,7 @@ class ClubController {
     def agregarClienteHabitual(String username){
         Club club = authenticatedUser
         Cliente cliente = Cliente.findByUsername(username)
-        club.agregarClienteHabitual(cliente)
+        clubService.agregarClienteHabitual(club, cliente)
         redirect action:"verClientesHabituales"
     }
 
@@ -54,7 +54,7 @@ class ClubController {
     def eliminarClienteHabitual(String username){
         Club club = authenticatedUser
         Cliente cliente = Cliente.findByUsername(username)
-        club.eliminarClienteHabitual(cliente)
+        clubService.eliminarClienteHabitual(club, cliente)
         redirect action:"verClientesHabituales"
     }
 
@@ -68,6 +68,7 @@ class ClubController {
     def misReservas(){
       Club club = authenticatedUser
       def reservas = Reserva.withCriteria {
+                                eq("asistencia", Asistencia.INDETERMINADA)
                                 turno {
                                     cancha {
                                         eq("club", club)
@@ -81,6 +82,7 @@ class ClubController {
     def misSenas(){
       Club club = authenticatedUser
       def reservas = Reserva.withCriteria {
+                                eq("asistencia", Asistencia.INDETERMINADA)
                                 turno {
                                     cancha {
                                         eq("club", club)

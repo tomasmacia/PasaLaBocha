@@ -16,20 +16,11 @@ abstract class ClienteService {
 
     protected abstract Cliente save(Cliente cliente)
 
-    @Transactional
-    void aumentarConfiabilidad(Long id) { //deberia ser todo un service que confirme la asistencia
-        Cliente cliente = get(id)
+    void aumentarConfiabilidad(Cliente cliente) {
         cliente.confiabilidad = cliente.confiabilidad.aumentar()
-        cliente.save(failOnError: true, flush: true)
     }
 
-    @Transactional
-    void disminuirConfiabilidad(Long id) {
-        Cliente cliente = get(id)
+    void disminuirConfiabilidad(Cliente cliente) {
         cliente.confiabilidad = cliente.confiabilidad.disminuir()
-        cliente.save(failOnError: true, flush: true)
     }
-
-
-
 }

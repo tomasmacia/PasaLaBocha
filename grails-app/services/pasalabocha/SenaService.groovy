@@ -3,6 +3,8 @@ package pasalabocha
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 
+import java.time.LocalDateTime
+
 @Service(Sena)
 abstract class SenaService {
 
@@ -18,8 +20,13 @@ abstract class SenaService {
 
     @Transactional
     void pagar(Sena sena){
-      sena.pagada = true // entidad pagar
-      save(sena)
+        if (sena.estaVencida(LocalDateTime.now())){
+            throw new Exception("La reserva ya se encuentra vencida")
+        } else if (sena.pagada){
+            throw new Exception("La reserva ya se encuentra pagada")
+        } else {
+            sena.pagada = true // entidad pagar
+        }
     }
 
 }

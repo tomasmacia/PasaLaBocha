@@ -62,6 +62,10 @@ class Turno {
     }
 
     boolean estaReservado(){
-        this.reserva != null
+        this.reserva != null && !this.reserva.estaCumplida()
+    }
+
+    boolean termino(LocalDateTime ahora){
+        ahora > this.fechaHorario + this.duracion
     }
 }

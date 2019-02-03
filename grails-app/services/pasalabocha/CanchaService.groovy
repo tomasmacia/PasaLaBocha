@@ -24,12 +24,12 @@ abstract class CanchaService {
     void generarTurnos(Long id, List<LocalDateTime> fechas, Duration duracion, Long precio) {
         Cancha cancha = get(id)
         fechas.each{ fecha ->
-            new Turno(
+            Turno turno = new Turno(
                     fechaHorario: fecha,
                     duracion: duracion,
                     precioBase: precio,
                     cancha: cancha)
-            cancha.agregarTurno(turno)
+            cancha.agregarTurno(turno, LocalDateTime.now())
             turno.save(failOnError: true)
         }
     }

@@ -26,6 +26,15 @@ class SenaController {
         respond new Sena(params)
     }
 
+    @Secured(['ROLE_CLUB'])
+    def pagar(Long id){
+        println(id)
+        Sena sena = Sena.get(id)
+        println(sena)
+        senaService.pagar(sena)
+        redirect(controller: "club", action:"misSenas")
+    }
+
     @Secured(['ROLE_ADMIN'])
     def chequearPagos(){
         def senas = senaService.list()

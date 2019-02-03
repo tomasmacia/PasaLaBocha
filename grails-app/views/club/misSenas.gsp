@@ -15,7 +15,7 @@
           <th>Precio restante</th>
           <th>Pagar seña</th>
         </tr>
-        <g:each in="${reservaSet}" var="reserva">
+        <g:each in="${reservaList}" var="reserva">
           <g:if test="${reserva.sena != null}">
             <tr>
               <td><g:link controller="turno" action="show" params="[id:reserva.turno.id]">${reserva.turno}</g:link></td>
@@ -28,7 +28,7 @@
                   Pagada
                 </g:if>
                 <g:else>
-                  <g:link controller="reserva" action="pagarSena" params="[reservaId:reserva.id]">Pagar seña</g:link>
+                  <g:link controller="sena" action="pagar" params="[id:reserva.sena.id]">Pagar seña</g:link>
                 </g:else>
               </td>
 

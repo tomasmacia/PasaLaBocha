@@ -30,10 +30,7 @@ class CanchaController {
 
     @Secured(['ROLE_CLUB'])
     def create() {
-        Club club = authenticatedUser
-        Cancha cancha = new Cancha(params)
-        club.agregarCancha(cancha)
-        respond cancha
+        respond new Cancha(params)
     }
 
     @Secured(['ROLE_CLUB'])
@@ -77,18 +74,6 @@ class CanchaController {
       respond cancha.turnos
     }
 
-    @Secured(['ROLE_CLUB'])
-    def asistenciaCumplida(Long canchaId, Long turnoId, Long clienteId) {
-        clienteService.aumentarConfiabilidad(clienteId)
-        eliminarTurno(canchaId, turnoId)
-    }
-
-    @Secured(['ROLE_CLUB'])
-    def asistenciaIncumplida(Long canchaId, Long turnoId, Long clienteId) {
-        clienteService.disminuirConfiabilidad(clienteId)
-        eliminarTurno(canchaId, turnoId)
-    }
-
     @Secured(['ROLE_ADMIN'])
     def eliminarTurnosVencidos(){
       List<Turno> turnos = Turno.list()
@@ -102,7 +87,9 @@ class CanchaController {
             notFound()
             return
         }
-
+        println(cancha.club)
+        Club club = authenticatedUser
+        club.agregarCancha(cancha)
         try {
             canchaService.save(cancha)
         } catch (ValidationException e) {

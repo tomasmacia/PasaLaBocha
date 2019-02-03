@@ -14,7 +14,7 @@
           <th>Precio restante</th>
           <th>Asistencia</th>
         </tr>
-        <g:each in="${reservaSet}" var="reserva">
+        <g:each in="${reservaList}" var="reserva">
           <tr>
             <td><g:link controller="turno" action="show" params="[id:reserva.turno.id]">${reserva.turno}</g:link></td>
             <td>${reserva.precioFinal}</td>
@@ -25,8 +25,8 @@
             </td>
             <td>${reserva.precioFinal - reserva.sena?.monto ?: 0}</td>
             <td>
-                <g:link controller="cancha" action="asistenciaCumplida" params="[canchaId:reserva.turno.cancha.id, turnoId: reserva.turno.id, clienteId: reserva.cliente.id]">Cumplida</g:link>
-                <g:link controller="cancha" action="asistenciaIncumplida" params="[canchaId:reserva.turno.cancha.id, turnoId: reserva.turno.id, , clienteId: reserva.cliente.id]">Incumplida</g:link>
+                <g:link controller="reserva" action="asistenciaCumplida" params="[id:reserva.id]">Cumplida</g:link>
+                <g:link controller="reserva" action="asistenciaIncumplida" params="[id: reserva.id]">Incumplida</g:link>
             </td>
           </tr>
         </g:each>
