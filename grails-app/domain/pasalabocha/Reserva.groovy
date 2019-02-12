@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 import java.time.Duration
 
 class Reserva {
-    BigDecimal precioFinal
+    Dinero precioFinal
     // lo dejo pero recordar que dijeron que no era necesario incluir esta historia de usuario
     LocalDateTime plazoLimiteCancelacion
     Integer nroReserva
@@ -15,13 +15,15 @@ class Reserva {
 
     static belongsTo = [turno: Turno, cliente: Cliente]
 
+    static embedded = ['precioFinal']
+
     static constraints = {
       //nullable porque todavia no esta implementado que se complete
       nroReserva nullable: true
       sena nullable: true
     }
 
-    public Reserva(Turno turno, Cliente cliente, BigDecimal precio,
+    public Reserva(Turno turno, Cliente cliente, Dinero precio,
                     LocalDateTime plazoLimiteCancelacion, LocalDateTime ahora){
         this.turno = turno
         this.cliente = cliente

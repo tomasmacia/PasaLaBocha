@@ -6,10 +6,12 @@ import java.time.LocalDateTime
 class Turno {
     LocalDateTime fechaHorario
     Duration duracion
-    BigDecimal precioBase // clase Dinero
+    Dinero precioBase // clase Dinero
     Descuento descuento
 
     static hasOne = [reserva: Reserva]
+
+    static embedded = ['precioBase']
 
     static belongsTo = [cancha: Cancha]
 
@@ -30,16 +32,16 @@ class Turno {
         LocalDateTime plazoLimiteCancelacion = fechaHorario
         plazoLimiteCancelacion = plazoLimiteCancelacion - tiempoLimiteCancelacionReserva
         Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
-        BigDecimal precioFinal = this.calcularPrecioFinal()
+        Dinero precioFinal = this.calcularPrecioFinal()
 
         this.reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion, ahora).save(failOnError: true)
     }
 
-    BigDecimal calcularPrecioFinal(){
+    Dinero calcularPrecioFinal(){
         if (this.descuento){
             return this.descuento.aplicarA(this.precioBase)
         } else {
-            return this.precioBase
+            return precioBase
         }
     }
 

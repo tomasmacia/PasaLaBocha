@@ -34,7 +34,7 @@ class SenaSpec extends Specification implements DomainUnitTest<Sena> {
         turno = new Turno(
                 fechaHorario: primeroEnero12hs,
                 duracion: unaHora,
-                precioBase: 500)
+                precioBase: new Dinero(BigDecimal.valueOf(500), Moneda.ARS))
         cancha.agregarTurno(turno, ahora)
         cliente = new Cliente(
                     nombre: "jose",

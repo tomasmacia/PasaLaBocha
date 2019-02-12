@@ -4,18 +4,20 @@ import java.time.LocalDateTime
 import java.time.Duration
 
 class Sena {
-    BigDecimal monto
+    Dinero monto
     boolean pagada
     LocalDateTime plazoLimitePago
     Integer nroSena // diferente al id de Sena
 
     static belongsTo = [reserva: Reserva]
 
+    static embedded = ['monto']
+
     static constraints = {
         nroSena nullable: true
     }
 
-    public Sena(Reserva reserva, Duration tiempoLimitePagoDeSena, BigDecimal precioReserva, Integer porcentajeSena, LocalDateTime ahora){
+    public Sena(Reserva reserva, Duration tiempoLimitePagoDeSena, Dinero precioReserva, Integer porcentajeSena, LocalDateTime ahora){
         this.reserva = reserva
         this.pagada = false
         this.plazoLimitePago = ahora + tiempoLimitePagoDeSena

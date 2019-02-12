@@ -69,20 +69,20 @@ class BootStrap {
         LocalDateTime mañanaALas12hs = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(12, 0))
         def turno1 = new Turno(fechaHorario: mañanaALas10hs,
               duracion: unaHora,
-              precioBase: 500)
+              precioBase: new Dinero(BigDecimal.valueOf(500), Moneda.ARS))
         canchaUnoRiver.agregarTurno(turno1, ahora)
         turno1.save(failOnError: true)
 
         LocalTime la1 = LocalTime.of(13,0,0);
         def turno2 = new Turno(fechaHorario: mañanaALas12hs,
               duracion: unaHora,
-              precioBase: 500)
+              precioBase: new Dinero(BigDecimal.valueOf(500), Moneda.ARS))
         canchaUnoRiver.agregarTurno(turno2, ahora)
         turno2.save(failOnError: true)
 
         def turno3 = new Turno(fechaHorario: mañanaALas12hs,
               duracion: unaHora,
-              precioBase: 400)
+              precioBase: new Dinero(BigDecimal.valueOf(400), Moneda.ARS))
         canchaUnoBoca.agregarTurno(turno3, ahora)
         turno3.save(failOnError: true)
 

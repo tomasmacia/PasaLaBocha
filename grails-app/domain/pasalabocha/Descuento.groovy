@@ -11,7 +11,7 @@ class Descuento {
 
     static belongsTo = [club: Club]
 
-    def aplicarA(BigDecimal precioBase){
-        precioBase * (1 - this.porcentaje / 100)
+    Dinero aplicarA(Dinero precioBase){
+        return precioBase * (1 - this.porcentaje / 100) // times en Dinero
     }
 }
