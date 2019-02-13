@@ -34,7 +34,6 @@ class Reserva {
         if (!club.esConfiable(cliente)){
             Duration tiempoLimitePagoDeSena = club.tiempoLimitePagoDeSena
             this.sena = new Sena(this, tiempoLimitePagoDeSena, precio, club.porcentajeSena, ahora)
-            this.sena.save(failOnError: true)
         }
     }
 

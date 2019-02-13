@@ -20,6 +20,7 @@ abstract class TurnoService {
 
     @Transactional
     void reservar(Turno turno, Cliente cliente){
-        turno.reservar(cliente, LocalDateTime.now())
+        Reserva reserva = turno.reservar(cliente, LocalDateTime.now())
+        reserva.save(failOnError: true)
     }
 }

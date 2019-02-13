@@ -24,7 +24,7 @@ class Turno {
         "${cancha}: ${fechaHorario}, ${duracion.toMinutes()} minutos"
     }
 
-    def reservar(Cliente cliente, LocalDateTime ahora){
+    Reserva reservar(Cliente cliente, LocalDateTime ahora){
         if (this.reserva){
             throw new Exception("El turno seleccionado ya se encuentra reservado")
         }
@@ -34,7 +34,8 @@ class Turno {
         Duration tiempoLimitePagoDeSena = this.cancha.club.tiempoLimitePagoDeSena
         Dinero precioFinal = this.calcularPrecioFinal()
 
-        this.reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion, ahora).save(failOnError: true)
+        this.reserva = new Reserva(this, cliente, precioFinal, plazoLimiteCancelacion, ahora)
+        this.reserva
     }
 
     Dinero calcularPrecioFinal(){
