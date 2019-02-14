@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 class Turno {
     LocalDateTime fechaHorario
     Duration duracion
-    Dinero precioBase // clase Dinero
+    Dinero precioBase
     Descuento descuento
 
     static hasOne = [reserva: Reserva]
