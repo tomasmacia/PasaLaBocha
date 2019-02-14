@@ -3,7 +3,7 @@ package pasalabocha
 import java.time.Duration
 import pasalabocha.login.User
 
-class Club extends User{
+class Club extends User implements Comparable<Club> {
     String nombre
     String email
     String ubicacion
@@ -12,7 +12,7 @@ class Club extends User{
     // lo dejo pero recordar que dijeron que no era necesario incluir esta historia de usuario
     Duration tiempoLimiteCancelacionReserva
     Duration tiempoLimitePagoDeSena
-    Set<Cancha> canchas
+    SortedSet<Cancha> canchas
     Set<Cliente> clientesHabituales // intermediario
     Set<Descuento> descuentos
 
@@ -55,5 +55,10 @@ class Club extends User{
         } else {
             return false
         }
+    }
+
+    @Override
+    int compareTo(Club o) {
+        return this.nombre <=> o.nombre
     }
 }

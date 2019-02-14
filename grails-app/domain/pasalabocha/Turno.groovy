@@ -3,7 +3,7 @@ package pasalabocha
 import java.time.Duration
 import java.time.LocalDateTime
 
-class Turno {
+class Turno implements Comparable<Turno> {
     LocalDateTime fechaHorario
     Duration duracion
     Dinero precioBase
@@ -70,5 +70,10 @@ class Turno {
 
     boolean termino(LocalDateTime ahora){
         ahora > this.fechaHorario + this.duracion
+    }
+
+    @Override
+    int compareTo(Turno otroTurno) {
+        return this.fechaHorario <=> otroTurno.fechaHorario
     }
 }

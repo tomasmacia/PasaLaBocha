@@ -2,14 +2,14 @@ package pasalabocha
 
 import java.time.LocalDateTime
 
-class Cancha {
+class Cancha implements Comparable<Cancha> {
 
     Dimensiones dimensiones
     TipoSuelo tipoSuelo
     Integer numeroDeCancha
     boolean poseeIluminacion
     Integer cantidadJugadores
-    Set<Turno> turnos
+    SortedSet<Turno> turnos
     Set<ReservaPermanente> reservasPermanentes
     // boolean aptoEspectador
 
@@ -77,5 +77,10 @@ class Cancha {
 
     def eliminarReservaPermante(ReservaPermanente reservaPermanente){
         /* TODO*/
+    }
+
+    @Override
+    int compareTo(Cancha o) {
+        return this.numeroDeCancha <=> o.numeroDeCancha
     }
 }
