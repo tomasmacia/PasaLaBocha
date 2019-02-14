@@ -95,6 +95,18 @@ class ClubController {
     }
 
     @Secured(['ROLE_CLUB'])
+    def misReservasPermanentes(){
+        Club club = authenticatedUser
+        def reservasPermanentes = ReservaPermanente.withCriteria {
+                                    cancha {
+                                        eq("club", club)
+                                    }
+                                }
+        println(reservasPermanentes)
+        respond reservasPermanentes
+    }
+
+    @Secured(['ROLE_CLUB'])
     def misCanchas(){
       Club club = authenticatedUser
       respond (club.canchas, model:[id:club.id])

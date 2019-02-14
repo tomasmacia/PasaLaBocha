@@ -37,6 +37,7 @@
             <g:link action="verClientesHabituales" id="${this.club.id}">Ver mis clientes habituales</g:link><br>
             <g:link action="misCanchas">Ver mis canchas</g:link><br>
             <g:link action="misReservas">Ver mis reservas</g:link><br>
+            <g:link action="misReservasPermanentes">Ver mis reservas permanentes</g:link><br>
             <g:link action="misSenas">Ver mis señas</g:link><br>
             <g:link action="generadorDescuentos">Ofrecer descuentos</g:link><br>
             </div>
