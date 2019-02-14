@@ -26,8 +26,16 @@ class DescuentoService {
     }
 
     @Transactional
-    def aplicar(Turno turno, Descuento descuento){
-        turno.descuento = descuento
-        turno.save(failOnError: true)
+    def aplicar(Descuento descuento) {
+        Club club = descuento.club
+
+        List<Turno> turnos = club.canchas.turnos.flatten().findAll { Turno turno ->
+            descuento.turnoAplica(turno)
+        }
+
+        println "Aplicando descuentos a los siguientes turnos -> " + turnos
+        turnos.forEach { turno ->
+            turno.descuento = descuento
+        }
     }
 }

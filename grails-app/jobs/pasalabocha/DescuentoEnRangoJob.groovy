@@ -2,10 +2,10 @@ package pasalabocha
 
 class DescuentoEnRangoJob {
 
-    DescuentoEnRangoService descuentoEnRangoService
+    DescuentoService descuentoService
 
     static triggers = {
-        cron name: 'descuentoRangoTrigger', cronExpression: "0 0/20 * * * ?" // cada 20 minutos
+        cron name: 'descuentoRangoTrigger', cronExpression: "0 0/1 * * * ?" // cada 20 minutos
     }
 
     // corre cada 20 minutos para actualizar nuevos turnos que no se les aplico descuento al momento de creacion del mismo
@@ -14,7 +14,7 @@ class DescuentoEnRangoJob {
         List<DescuentoEnRango> descuentos = DescuentoEnRango.getAll()
         descuentos.forEach { descuento ->
             println descuento
-            descuentoEnRangoService.aplicar(descuento)
+            descuentoService.aplicar(descuento)
         }
         println "Finished DescuentoEnRangoJob"
     }

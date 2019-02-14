@@ -2,10 +2,10 @@ package pasalabocha
 
 class DescuentoPorHorasRestantesJob {
 
-    DescuentoPorHorasRestantesService descuentoPorHorasRestantesService
+    DescuentoService descuentoService
 
     static triggers = {
-        cron name: 'descuentoHorasRestantesTrigger', cronExpression: "0 0/5 * * * ?" // cada 5 minutos
+        cron name: 'descuentoHorasRestantesTrigger', cronExpression: "0 0/1 * * * ?" // cada 5 minutos
     }
 
     def execute() {
@@ -13,7 +13,7 @@ class DescuentoPorHorasRestantesJob {
         List<DescuentoPorHorasRestantes> descuentos = DescuentoPorHorasRestantes.getAll()
         descuentos.forEach { descuento ->
             println descuento
-            descuentoPorHorasRestantesService.aplicar(descuento)
+            descuentoService.aplicar(descuento)
         }
         println "Finished DescuentoPorHorasRestantesJob"
     }

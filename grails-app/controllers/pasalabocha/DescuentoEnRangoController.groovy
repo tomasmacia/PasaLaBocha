@@ -9,6 +9,7 @@ import java.time.LocalDateTime
 class DescuentoEnRangoController {
 
     DescuentoEnRangoService descuentoEnRangoService
+    DescuentoService descuentoService
 
     static allowedMethods = [aplicarYGuardar: "POST", update: "PUT", delete: "DELETE"]
 
@@ -36,7 +37,7 @@ class DescuentoEnRangoController {
         save(descuento)
 
         // lo aplico apenas lo creo y despues corro un job para actualizar nuevos turnos en en el rango horario
-        descuentoEnRangoService.aplicar(descuento)
+        descuentoService.aplicar(descuento)
     }
 
     private save(DescuentoEnRango descuentoEnRango) {
