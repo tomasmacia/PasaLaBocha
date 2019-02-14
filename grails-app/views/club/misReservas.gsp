@@ -22,8 +22,11 @@
               <g:if test="${reserva.sena != null}">
                 <g:link controller="sena" action="show" params="[id:reserva.sena.id]">${reserva.sena}</g:link>
               </g:if>
+              <g:else>
+                No hay
+              </g:else>
             </td>
-            <td>${reserva.precioFinal - reserva.sena?.monto ?: 0}</td>
+            <td>${reserva.getPrecioRestante()}</td>
             <td>
                 <g:link controller="reserva" action="asistenciaCumplida" params="[id:reserva.id]">Cumplida</g:link>
                 <g:link controller="reserva" action="asistenciaIncumplida" params="[id: reserva.id]">Incumplida</g:link>

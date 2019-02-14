@@ -32,6 +32,13 @@ class Sena {
         this.pagada
     }
 
+    Dinero getPrecioRestante(){
+        if (estaPaga()){
+            return new Dinero(0)
+        }
+        return this.monto
+    }
+
     String toString(){
       String pagadaString = "impaga"
       if (pagada){

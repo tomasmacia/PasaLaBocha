@@ -22,7 +22,9 @@ abstract class ReservaService {
 
     @Transactional
     void eliminarReservas(List<Reserva> reservas){
-        reservas.each {it.delete(flush:true, failOnError:true)}
+        reservas.each {
+            it.turno.reserva = null
+            it.delete(flush:true, failOnError:true)}
     }
 
     @Transactional
@@ -40,10 +42,27 @@ abstract class ReservaService {
     void asistenciaIncumplida(Long reservaId){
         Reserva reserva = Reserva.get(reservaId)
         if (!reserva.turno.termino(LocalDateTime.now())){
-           throw new Exception("El turno todavia no ha terminado")
+            throw new Exception("El turno todavia no ha terminado")
         }
         reserva.asistencia = Asistencia.NO_ASISTIO
         clienteService.disminuirConfiabilidad(reserva.cliente)
+        def reservas = Reserva.withCriteria {
+                            eq("cliente", reserva.cliente)
+                            eq("asistencia", Asistencia.INDETERMINADA)
+                            turno{
+                                cancha{
+                                    eq("club", reserva.turno.cancha.club)
+                                    }
+                                }
+                            }
+        eliminarReservas(reservas)
+        def reservasPermanetes = ReservaPermanente.withCriteria {
+                            eq("cliente", reserva.cliente)
+                            cancha{
+                                eq("club", reserva.turno.cancha.club)
+                                }
+                            }
+        reservasPermanetes.each {it.delete(flush:true, failOnError:true)}
     }
 
 }

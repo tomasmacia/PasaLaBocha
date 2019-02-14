@@ -37,6 +37,13 @@ class Reserva {
         }
     }
 
+    Dinero getPrecioRestante(){
+        if (this.sena){
+            return this.precioFinal - this.sena.getPrecioRestante()
+        }
+        return this.precioFinal
+    }
+
     boolean tieneSenaPaga(){
         this.sena && this.sena.estaPaga()
     }

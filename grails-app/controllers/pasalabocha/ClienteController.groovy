@@ -37,6 +37,12 @@ class ClienteController {
       respond cliente.reservas
     }
 
+    @Secured(['ROLE_CLIENTE'])
+    def misReservasPermanentes(){
+      Cliente cliente = authenticatedUser
+      respond cliente.reservasPermanentes
+    }
+
     def save(Cliente cliente) {
         if (cliente == null) {
             notFound()

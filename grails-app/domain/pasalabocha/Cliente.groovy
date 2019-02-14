@@ -12,7 +12,7 @@ class Cliente extends User{
 
     static embedded = ['confiabilidad']
 
-    static hasMany = [reservas: Reserva]
+    static hasMany = [reservas: Reserva, reservasPermanentes: ReservaPermanente]
 
     static constraints = {
       nombre nullable: false, blank: false
