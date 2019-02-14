@@ -21,7 +21,7 @@
             <td>${turno.duracion.toMinutes()}</td>
             <td>
                 <g:if test="${turno.calcularPrecioFinal() != turno.precioBase}">
-                    ${turno.getPrecioFinal()} <del>${turno.precioBase}</del>
+                    ${turno.calcularPrecioFinal()} <del>${turno.precioBase}</del>
                 </g:if>
                 <g:else>
                     ${turno.precioBase}
