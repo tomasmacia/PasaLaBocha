@@ -32,12 +32,9 @@ class TurnoController {
 
     @Secured(['ROLE_CLUB'])
     def save(Turno turno) {
-        System.out.println(params)
         String[] tokens = params.fecha.split("-");
         LocalDate localDate = LocalDate.parse(params.fecha);
         turno.fecha = localDate
-        System.out.println(localDate)
-        System.out.println(turno)
         if (turno == null) {
             notFound()
             return

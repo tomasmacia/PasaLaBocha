@@ -57,7 +57,7 @@ class CanchaController {
         }
         Duration duracion = Duration.ofMinutes(Long.valueOf(params.duracion.toString()))
         canchaService.generarTurnos(Long.valueOf(params.id.toString()), fechas, duracion, Long.valueOf(params.precio.toString()))
-        redirect(action: "show", params: [id: params.id])
+        redirect(action: "verMisTurnos", params: [canchaId: params.id])
     }
 
     @Secured(['ROLE_CLUB'])

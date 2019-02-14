@@ -26,9 +26,11 @@ class ClubController {
         respond new Club(params)
     }
 
+    @Secured(['ROLE_CLIENTE'])
     def verCanchas(Long id){
         Club club = clubService.get(id)
-        respond (club.canchas)
+        boolean esHabitual = club.esHabitual(authenticatedUser)
+        respond club.canchas, model:[esHabitual: esHabitual]
     }
 
     @Secured(['ROLE_CLUB'])

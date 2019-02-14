@@ -10,11 +10,12 @@ class Cancha {
     boolean poseeIluminacion
     Integer cantidadJugadores
     Set<Turno> turnos
+    Set<ReservaPermanente> reservasPermanentes
     // boolean aptoEspectador
 
     static embedded = ['dimensiones']
 
-    static hasMany = [turnos: Turno]
+    static hasMany = [turnos: Turno, reservasPermanentes: ReservaPermanente]
 
     static belongsTo = [club: Club] // no existe la cancha si desaparece el Club
 
@@ -37,6 +38,13 @@ class Cancha {
             }
         }
         this.addToTurnos(turno)
+        if (reservasPermanentes){
+            ReservaPermanente reservaPermanente = reservasPermanentes.find {it.aplicaA(turno)}
+            if (reservaPermanente){
+                Reserva reserva = turno.reservar(reservaPermanente.cliente, LocalDateTime.now())
+                return reserva
+            }
+        }
     }
 
     def eliminarTurno(Turno turno){
@@ -48,5 +56,26 @@ class Cancha {
         } else {
            throw new Exception("El turno que intenta eliminar ya se encuentra reservado")
         }
+    }
+
+    def agregarReservaPermanente(ReservaPermanente reservaPermanente){
+        if (reservasPermanentes){
+            def superpuestas = reservasPermanentes.findAll {it.seSuperpone(reservaPermanente)}
+            if (superpuestas){
+                throw new Exception("Ya existe una reserva permanente que se superpone con esta")
+            }
+        } else if (!this.club.esHabitual(reservaPermanente.cliente)){
+            throw new Exception("El cliente no es habitual en este club")
+        }
+        this.addToReservasPermanentes(reservaPermanente)
+        if (turnos){
+            def reservas = reservaPermanente.aplicarA(turnos)
+            return reservas
+        }
+
+    }
+
+    def eliminarReservaPermante(ReservaPermanente reservaPermanente){
+        /* TODO*/
     }
 }

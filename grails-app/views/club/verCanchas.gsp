@@ -14,6 +14,9 @@
             <td>Cantidad de jugadores</td>
             <td>Iluminación</td>
             <td>Ver turnos</td>
+            <g:if test="${esHabitual}">
+            <td>Reserva permanente</td>
+            </g:if>
          </tr>
         <g:each in="${canchaSet}" var="cancha">
           <tr>
@@ -28,6 +31,9 @@
             <td>No posee</td>
             </g:else>
             <td><g:link controller="cancha" action="verTurnos" params="[id:cancha.id]">Ver turnos</g:link></td>
+            <g:if test="${esHabitual}">
+            <td><g:link controller="reservaPermanente" action="create" params="[id:cancha.id]">Reservar permanentemente</g:link></td>
+            </g:if>
           </tr>
         </g:each>
       </table>

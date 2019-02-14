@@ -27,10 +27,12 @@ abstract class CanchaService {
             Turno turno = new Turno(
                     fechaHorario: fecha,
                     duracion: duracion,
-                    precioBase: precio,
-                    cancha: cancha)
-            cancha.agregarTurno(turno, LocalDateTime.now())
+                    precioBase: new Dinero(precio, Moneda.ARS))
+            Reserva reserva = cancha.agregarTurno(turno, LocalDateTime.now())
             turno.save(failOnError: true)
+            if (reserva){
+                reserva.save(failOnError: true)
+            }
         }
     }
 
@@ -40,6 +42,11 @@ abstract class CanchaService {
         turnos.each {turno -> if (turno.estaVencido(ahora)){
                                 eliminarTurno(turno.cancha.id, turno)
                               }}
+    }
+
+    @Transactional
+    def agregarReservaPermanente(Cancha cancha, ReservaPermanente reservaPermanente){
+        cancha.agregarReservaPermanente(reservaPermanente)
     }
 
 }
