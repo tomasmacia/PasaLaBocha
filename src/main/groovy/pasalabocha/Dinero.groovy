@@ -1,5 +1,7 @@
 package pasalabocha
 
+import java.text.DecimalFormat
+
 class Dinero implements Comparable<Dinero>, Serializable {
     BigDecimal monto
     Moneda moneda
@@ -10,6 +12,8 @@ class Dinero implements Comparable<Dinero>, Serializable {
         }
         this.monto = monto
         this.moneda = moneda
+
+        this.monto.setScale(2, BigDecimal.ROUND_DOWN)
     }
 
     Dinero() {
@@ -40,7 +44,15 @@ class Dinero implements Comparable<Dinero>, Serializable {
 
     @Override
     String toString() {
-        return this.monto.toString() + " " + this.moneda.toString()
+        DecimalFormat df = new DecimalFormat()
+
+        df.setMaximumFractionDigits(2)
+
+        df.setMinimumFractionDigits(0)
+
+        df.setGroupingUsed(false)
+
+        return df.format(this.monto) + " " + this.moneda.toString()
     }
 
 
