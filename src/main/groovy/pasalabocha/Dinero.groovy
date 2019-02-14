@@ -59,14 +59,14 @@ class Dinero implements Comparable<Dinero>, Serializable {
     }
 
     Dinero multiply(def factor){
-        BigDecimal factorDecimal = new BigDecimal(factor)
+        BigDecimal factorDecimal = BigDecimal.valueOf(factor)
         BigDecimal nuevoMonto = this.monto * factorDecimal
         return new Dinero(nuevoMonto, this.moneda)
     }
 
 
     Dinero div(def factor){
-        BigDecimal factorDecimal = new BigDecimal(factor)
+        BigDecimal factorDecimal = BigDecimal.valueOf(factor)
         BigDecimal nuevoMonto = this.monto / factorDecimal
         return new Dinero(nuevoMonto, this.moneda)
     }
