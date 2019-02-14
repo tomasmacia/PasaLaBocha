@@ -21,8 +21,6 @@ class Dinero implements Comparable<Dinero>, Serializable {
     int compareTo(Dinero that) {
         int iguales = 0
 
-        if ( this == that ) return iguales
-
         int comparacion = this.monto.compareTo(that.monto)
         if ( comparacion != iguales ) return comparacion
 

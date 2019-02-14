@@ -21,7 +21,7 @@ abstract class CanchaService {
     protected abstract Cancha save(Cancha cancha)
 
     @Transactional
-    void generarTurnos(Long id, List<LocalDateTime> fechas, Duration duracion, Long precio) {
+    void generarTurnos(Long id, List<LocalDateTime> fechas, Duration duracion, Dinero precio) {
         Cancha cancha = get(id)
         fechas.each{ fecha ->
             Turno turno = new Turno(
