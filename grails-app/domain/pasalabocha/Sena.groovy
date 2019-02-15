@@ -34,7 +34,7 @@ class Sena {
 
     Dinero getPrecioRestante(){
         if (estaPaga()){
-            return new Dinero(0)
+            return new Dinero(BigDecimal.valueOf(0), Moneda.ARS)
         }
         return this.monto
     }
